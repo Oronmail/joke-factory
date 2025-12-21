@@ -138,6 +138,11 @@
             color: white;
         }
 
+        .category-btn[data-category="farts"] {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+        }
+
         .joke-display {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border-radius: 15px;
@@ -506,6 +511,96 @@
             color: #666;
         }
 
+        /* Farts Panel */
+        .farts-panel {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            height: 100%;
+        }
+
+        .farts-panel.active {
+            display: flex;
+        }
+
+        .farts-panel h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+            color: #8B4513;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .volume-control input[type="range"] {
+            width: 120px;
+            cursor: pointer;
+        }
+
+        .farts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+            overflow-y: auto;
+            flex: 1;
+            padding: 5px;
+        }
+
+        .fart-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 8px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
+            color: white;
+            font-family: inherit;
+            font-size: 0.75em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(139, 69, 19, 0.3);
+        }
+
+        .fart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+        }
+
+        .fart-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fart-btn.playing {
+            animation: fartPulse 0.3s ease;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        }
+
+        @keyframes fartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .fart-btn .emoji {
+            font-size: 1.8em;
+            margin-bottom: 4px;
+        }
+
+        .fart-btn .name {
+            text-align: center;
+            line-height: 1.2;
+        }
+
         /* Mobile Menu - Hidden by default */
         .mobile-menu-toggle,
         .mobile-menu-overlay {
@@ -767,6 +862,35 @@
             .joke-counter {
                 font-size: 0.7em;
             }
+
+            /* Farts panel mobile */
+            .farts-panel {
+                padding: 10px;
+            }
+
+            .farts-panel h3 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+
+            .volume-control {
+                margin-bottom: 10px;
+            }
+
+            .farts-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+            }
+
+            .fart-btn {
+                padding: 8px 4px;
+                font-size: 0.65em;
+            }
+
+            .fart-btn .emoji {
+                font-size: 1.4em;
+                margin-bottom: 2px;
+            }
         }
 
         /* Extra small screens */
@@ -848,6 +972,7 @@
                 <button class="category-btn" data-category="doctors">🏥 רופאים</button>
                 <button class="category-btn" data-category="computers">💻 מחשבים</button>
                 <button class="category-btn" data-category="sports">⚽ ספורט</button>
+                <button class="category-btn" data-category="farts">💨 פלוצים</button>
             </div>
 
             <div class="joke-display">
@@ -880,6 +1005,19 @@
                         </div>
                     </div>
                     <div class="rating-feedback" id="ratingFeedback"></div>
+                </div>
+            </div>
+
+            <!-- פאנל פלוצים -->
+            <div class="farts-panel" id="fartsPanel">
+                <h3>💨 מכונת הפלוצים 💨</h3>
+                <div class="volume-control">
+                    <span>🔈</span>
+                    <input type="range" id="fartVolume" min="0" max="100" value="70">
+                    <span>🔊</span>
+                </div>
+                <div class="farts-grid" id="fartsGrid">
+                    <!-- כפתורי הפלוצים יתווספו ב-JavaScript -->
                 </div>
             </div>
 
@@ -1333,7 +1471,36 @@
             categoryBtns.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.category === category);
             });
-            showNewJoke();
+
+            // בדיקה אם זו קטגוריית פלוצים
+            if (category === 'farts') {
+                showFartsPanel();
+            } else {
+                hideFartsPanel();
+                showNewJoke();
+            }
+        }
+
+        // הצגת פאנל הפלוצים
+        function showFartsPanel() {
+            const jokeDisplay = document.querySelector('.joke-display');
+            const fartsPanel = document.getElementById('fartsPanel');
+            const bottomRow = document.querySelector('.bottom-row');
+
+            jokeDisplay.style.display = 'none';
+            bottomRow.style.display = 'none';
+            fartsPanel.classList.add('active');
+        }
+
+        // הסתרת פאנל הפלוצים
+        function hideFartsPanel() {
+            const jokeDisplay = document.querySelector('.joke-display');
+            const fartsPanel = document.getElementById('fartsPanel');
+            const bottomRow = document.querySelector('.bottom-row');
+
+            fartsPanel.classList.remove('active');
+            jokeDisplay.style.display = 'flex';
+            bottomRow.style.display = 'flex';
         }
 
         // Event Listeners
@@ -1455,6 +1622,627 @@
         // טעינה ראשונית
         loadJokes();
         listenToRatings(); // האזנה לדירוגים מ-Firebase בזמן אמת
+
+        // ========== מערכת פלוצים ==========
+        const fartsPanel = document.getElementById('fartsPanel');
+        const fartsGrid = document.getElementById('fartsGrid');
+        const fartVolumeSlider = document.getElementById('fartVolume');
+        const jokeDisplay = document.querySelector('.joke-display');
+        const bottomRow = document.querySelector('.bottom-row');
+
+        // סוגי הפלוצים עם פרמטרים לכל צליל
+        const fartTypes = [
+            { id: 'classic', emoji: '💨', name: 'קלאסי', freq: 80, duration: 0.4, type: 'classic' },
+            { id: 'trumpet', emoji: '🎺', name: 'תזמורתי', freq: 150, duration: 0.6, type: 'trumpet' },
+            { id: 'duck', emoji: '🦆', name: 'ברווז', freq: 300, duration: 0.3, type: 'squeak' },
+            { id: 'bomb', emoji: '💣', name: 'פצצה', freq: 50, duration: 1.0, type: 'bomb' },
+            { id: 'musical', emoji: '🎵', name: 'מוזיקלי', freq: 200, duration: 0.5, type: 'musical' },
+            { id: 'wave', emoji: '🌊', name: 'גלי', freq: 100, duration: 0.8, type: 'wave' },
+            { id: 'fast', emoji: '⚡', name: 'מהיר', freq: 120, duration: 0.15, type: 'fast' },
+            { id: 'slow', emoji: '🐌', name: 'איטי', freq: 60, duration: 1.5, type: 'slow' },
+            { id: 'dramatic', emoji: '🎭', name: 'דרמטי', freq: 70, duration: 1.2, type: 'dramatic' },
+            { id: 'quiet', emoji: '😴', name: 'שקט', freq: 200, duration: 0.2, type: 'quiet' },
+            { id: 'bell', emoji: '🔔', name: 'פעמון', freq: 400, duration: 0.4, type: 'bell' },
+            { id: 'train', emoji: '🚂', name: 'רכבת', freq: 90, duration: 0.8, type: 'train' },
+            { id: 'guitar', emoji: '🎸', name: 'גיטרה', freq: 180, duration: 0.5, type: 'guitar' },
+            { id: 'drums', emoji: '🥁', name: 'תופים', freq: 100, duration: 0.3, type: 'drums' },
+            { id: 'storm', emoji: '🌪️', name: 'סערה', freq: 40, duration: 2.0, type: 'storm' },
+            { id: 'elephant', emoji: '🐘', name: 'פיל', freq: 35, duration: 1.5, type: 'elephant' },
+            { id: 'mouse', emoji: '🐁', name: 'עכבר', freq: 500, duration: 0.15, type: 'mouse' },
+            { id: 'circus', emoji: '🎪', name: 'קרקס', freq: 250, duration: 0.6, type: 'circus' },
+            { id: 'grandpa', emoji: '👴', name: 'סבא', freq: 55, duration: 1.8, type: 'grandpa' },
+            { id: 'baby', emoji: '👶', name: 'תינוק', freq: 350, duration: 0.25, type: 'baby' },
+            { id: 'robot', emoji: '🤖', name: 'רובוט', freq: 150, duration: 0.4, type: 'robot' },
+            { id: 'alien', emoji: '👽', name: 'חייזר', freq: 600, duration: 0.5, type: 'alien' }
+        ];
+
+        // יצירת כפתורי הפלוצים
+        function createFartButtons() {
+            fartsGrid.innerHTML = '';
+            fartTypes.forEach(fart => {
+                const btn = document.createElement('button');
+                btn.className = 'fart-btn';
+                btn.dataset.fartId = fart.id;
+                btn.innerHTML = `
+                    <span class="emoji">${fart.emoji}</span>
+                    <span class="name">${fart.name}</span>
+                `;
+                btn.addEventListener('click', () => playFart(fart, btn));
+                fartsGrid.appendChild(btn);
+            });
+        }
+
+        // פונקציה ליצירת צליל פלוץ סינתטי ריאליסטי
+        function playFart(fart, btn) {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const volume = fartVolumeSlider.value / 100;
+
+            // אנימציה על הכפתור
+            btn.classList.add('playing');
+            setTimeout(() => btn.classList.remove('playing'), 300);
+
+            // יצירת הצליל בהתאם לסוג
+            switch(fart.type) {
+                case 'classic':
+                    createClassicFart(audioContext, volume, fart.duration);
+                    break;
+                case 'trumpet':
+                    createTrumpetFart(audioContext, volume, fart.duration);
+                    break;
+                case 'squeak':
+                    createSqueakFart(audioContext, volume, fart.duration);
+                    break;
+                case 'bomb':
+                    createBombFart(audioContext, volume, fart.duration);
+                    break;
+                case 'musical':
+                    createMusicalFart(audioContext, volume, fart.duration);
+                    break;
+                case 'wave':
+                    createWaveFart(audioContext, volume, fart.duration);
+                    break;
+                case 'fast':
+                    createFastFart(audioContext, volume, fart.duration);
+                    break;
+                case 'slow':
+                    createSlowFart(audioContext, volume, fart.duration);
+                    break;
+                case 'dramatic':
+                    createDramaticFart(audioContext, volume, fart.duration);
+                    break;
+                case 'quiet':
+                    createQuietFart(audioContext, volume, fart.duration);
+                    break;
+                case 'bell':
+                    createBellFart(audioContext, volume, fart.duration);
+                    break;
+                case 'train':
+                    createTrainFart(audioContext, volume, fart.duration);
+                    break;
+                case 'guitar':
+                    createGuitarFart(audioContext, volume, fart.duration);
+                    break;
+                case 'drums':
+                    createDrumsFart(audioContext, volume, fart.duration);
+                    break;
+                case 'storm':
+                    createStormFart(audioContext, volume, fart.duration);
+                    break;
+                case 'elephant':
+                    createElephantFart(audioContext, volume, fart.duration);
+                    break;
+                case 'mouse':
+                    createMouseFart(audioContext, volume, fart.duration);
+                    break;
+                case 'circus':
+                    createCircusFart(audioContext, volume, fart.duration);
+                    break;
+                case 'grandpa':
+                    createGrandpaFart(audioContext, volume, fart.duration);
+                    break;
+                case 'baby':
+                    createBabyFart(audioContext, volume, fart.duration);
+                    break;
+                case 'robot':
+                    createRobotFart(audioContext, volume, fart.duration);
+                    break;
+                case 'alien':
+                    createAlienFart(audioContext, volume, fart.duration);
+                    break;
+                default:
+                    createClassicFart(audioContext, volume, fart.duration);
+            }
+        }
+
+        // פונקציות יצירת צלילים שונים
+        function createClassicFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const noise = createNoise(ctx, dur);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(80, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.5, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            noise.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createTrumpetFart(ctx, vol, dur) {
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc1.type = 'sawtooth';
+            osc2.type = 'square';
+            osc1.frequency.setValueAtTime(150, ctx.currentTime);
+            osc2.frequency.setValueAtTime(155, ctx.currentTime);
+            osc1.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + dur);
+            osc2.frequency.exponentialRampToValueAtTime(105, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.4, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc1.start();
+            osc2.start();
+            osc1.stop(ctx.currentTime + dur);
+            osc2.stop(ctx.currentTime + dur);
+        }
+
+        function createSqueakFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(400, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + dur * 0.5);
+            osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createBombFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const noise = createNoise(ctx, dur);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(50, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.8, ctx.currentTime);
+            gain.gain.setValueAtTime(vol * 0.9, ctx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            noise.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createMusicalFart(ctx, vol, dur) {
+            const notes = [200, 250, 300, 250, 200];
+            const noteDur = dur / notes.length;
+
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + i * noteDur);
+
+                gain.gain.setValueAtTime(0, ctx.currentTime + i * noteDur);
+                gain.gain.linearRampToValueAtTime(vol * 0.3, ctx.currentTime + i * noteDur + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (i + 1) * noteDur);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * noteDur);
+                osc.stop(ctx.currentTime + (i + 1) * noteDur);
+            });
+        }
+
+        function createWaveFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const lfo = ctx.createOscillator();
+            const lfoGain = ctx.createGain();
+            const gain = ctx.createGain();
+
+            lfo.frequency.setValueAtTime(8, ctx.currentTime);
+            lfoGain.gain.setValueAtTime(30, ctx.currentTime);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(80, ctx.currentTime);
+
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+
+            gain.gain.setValueAtTime(vol * 0.4, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            lfo.start();
+            osc.start();
+            lfo.stop(ctx.currentTime + dur);
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createFastFart(ctx, vol, dur) {
+            for(let i = 0; i < 3; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(120 + i * 20, ctx.currentTime + i * 0.05);
+
+                gain.gain.setValueAtTime(vol * 0.4, ctx.currentTime + i * 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.05 + dur/3);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * 0.05);
+                osc.stop(ctx.currentTime + i * 0.05 + dur/3);
+            }
+        }
+
+        function createSlowFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const noise = createNoise(ctx, dur);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(60, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(50, ctx.currentTime + dur * 0.3);
+            osc.frequency.linearRampToValueAtTime(55, ctx.currentTime + dur * 0.6);
+            osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.3, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(vol * 0.4, ctx.currentTime + dur * 0.5);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            noise.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createDramaticFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(100, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + dur * 0.2);
+            osc.frequency.linearRampToValueAtTime(60, ctx.currentTime + dur * 0.4);
+            osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(0.01, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(vol * 0.6, ctx.currentTime + dur * 0.1);
+            gain.gain.setValueAtTime(vol * 0.6, ctx.currentTime + dur * 0.5);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createQuietFart(ctx, vol, dur) {
+            const noise = createNoise(ctx, dur, vol * 0.15);
+        }
+
+        function createBellFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(400, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.4, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createTrainFart(ctx, vol, dur) {
+            for(let i = 0; i < 4; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(80 + i * 10, ctx.currentTime + i * dur/4);
+
+                gain.gain.setValueAtTime(vol * 0.4, ctx.currentTime + i * dur/4);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (i+1) * dur/4);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * dur/4);
+                osc.stop(ctx.currentTime + (i+1) * dur/4);
+            }
+        }
+
+        function createGuitarFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(180, ctx.currentTime);
+            osc.frequency.setValueAtTime(165, ctx.currentTime + dur * 0.3);
+            osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.5, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createDrumsFart(ctx, vol, dur) {
+            for(let i = 0; i < 3; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(100, ctx.currentTime + i * dur/3);
+                osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + (i+0.8) * dur/3);
+
+                gain.gain.setValueAtTime(vol * 0.5, ctx.currentTime + i * dur/3);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (i+0.9) * dur/3);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * dur/3);
+                osc.stop(ctx.currentTime + (i+1) * dur/3);
+            }
+        }
+
+        function createStormFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const lfo = ctx.createOscillator();
+            const lfoGain = ctx.createGain();
+            const gain = ctx.createGain();
+            const noise = createNoise(ctx, dur, vol * 0.3);
+
+            lfo.frequency.setValueAtTime(3, ctx.currentTime);
+            lfoGain.gain.setValueAtTime(20, ctx.currentTime);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(40, ctx.currentTime);
+
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+
+            gain.gain.setValueAtTime(vol * 0.5, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            lfo.start();
+            osc.start();
+            lfo.stop(ctx.currentTime + dur);
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createElephantFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const noise = createNoise(ctx, dur, vol * 0.4);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(35, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(45, ctx.currentTime + dur * 0.3);
+            osc.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.7, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createMouseFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(600, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createCircusFart(ctx, vol, dur) {
+            const notes = [250, 300, 350, 300, 250, 200];
+            const noteDur = dur / notes.length;
+
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + i * noteDur);
+
+                gain.gain.setValueAtTime(vol * 0.25, ctx.currentTime + i * noteDur);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (i + 0.8) * noteDur);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * noteDur);
+                osc.stop(ctx.currentTime + (i + 1) * noteDur);
+            });
+        }
+
+        function createGrandpaFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const noise = createNoise(ctx, dur, vol * 0.3);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(55, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(50, ctx.currentTime + dur * 0.2);
+            osc.frequency.linearRampToValueAtTime(60, ctx.currentTime + dur * 0.5);
+            osc.frequency.linearRampToValueAtTime(45, ctx.currentTime + dur * 0.7);
+            osc.frequency.exponentialRampToValueAtTime(25, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.4, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(vol * 0.5, ctx.currentTime + dur * 0.3);
+            gain.gain.linearRampToValueAtTime(vol * 0.3, ctx.currentTime + dur * 0.6);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createBabyFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(350, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(250, ctx.currentTime + dur);
+
+            gain.gain.setValueAtTime(vol * 0.25, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        function createRobotFart(ctx, vol, dur) {
+            for(let i = 0; i < 5; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(150 + Math.random() * 100, ctx.currentTime + i * dur/5);
+
+                gain.gain.setValueAtTime(vol * 0.3, ctx.currentTime + i * dur/5);
+                gain.gain.setValueAtTime(0, ctx.currentTime + (i + 0.8) * dur/5);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * dur/5);
+                osc.stop(ctx.currentTime + (i + 1) * dur/5);
+            }
+        }
+
+        function createAlienFart(ctx, vol, dur) {
+            const osc = ctx.createOscillator();
+            const lfo = ctx.createOscillator();
+            const lfoGain = ctx.createGain();
+            const gain = ctx.createGain();
+
+            lfo.frequency.setValueAtTime(20, ctx.currentTime);
+            lfoGain.gain.setValueAtTime(200, ctx.currentTime);
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(600, ctx.currentTime);
+
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+
+            gain.gain.setValueAtTime(vol * 0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            lfo.start();
+            osc.start();
+            lfo.stop(ctx.currentTime + dur);
+            osc.stop(ctx.currentTime + dur);
+        }
+
+        // פונקציה ליצירת רעש (משותפת לכל הפלוצים)
+        function createNoise(ctx, dur, vol = 0.2) {
+            const bufferSize = ctx.sampleRate * dur;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+
+            for(let i = 0; i < bufferSize; i++) {
+                data[i] = (Math.random() * 2 - 1) * 0.5;
+            }
+
+            const noise = ctx.createBufferSource();
+            const filter = ctx.createBiquadFilter();
+            const gain = ctx.createGain();
+
+            noise.buffer = buffer;
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(500, ctx.currentTime);
+
+            gain.gain.setValueAtTime(vol, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+
+            noise.start();
+            noise.stop(ctx.currentTime + dur);
+
+            return gain;
+        }
+
+        // יצירת כפתורי הפלוצים בטעינה
+        createFartButtons();
     </script>
 </body>
 </html>
