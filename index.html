@@ -123,6 +123,21 @@
             color: white;
         }
 
+        .category-btn[data-category="doctors"] {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+        }
+
+        .category-btn[data-category="computers"] {
+            background: linear-gradient(135deg, #5f9ea0 0%, #48d1cc 100%);
+            color: white;
+        }
+
+        .category-btn[data-category="sports"] {
+            background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+            color: white;
+        }
+
         .joke-display {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border-radius: 15px;
@@ -338,6 +353,9 @@
         .sidebar-item .category-tag.food { background: #43e97b; }
         .sidebar-item .category-tag.wordplay { background: #fa709a; }
         .sidebar-item .category-tag.family { background: #a18cd1; }
+        .sidebar-item .category-tag.doctors { background: #ff6b6b; }
+        .sidebar-item .category-tag.computers { background: #5f9ea0; }
+        .sidebar-item .category-tag.sports { background: #32cd32; }
 
         .sidebar-item.my-rating {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
@@ -827,6 +845,9 @@
                 <button class="category-btn" data-category="food">🍕 אוכל</button>
                 <button class="category-btn" data-category="wordplay">🎭 משחקי מילים</button>
                 <button class="category-btn" data-category="family">👨‍👩‍👧‍👦 משפחה</button>
+                <button class="category-btn" data-category="doctors">🏥 רופאים</button>
+                <button class="category-btn" data-category="computers">💻 מחשבים</button>
+                <button class="category-btn" data-category="sports">⚽ ספורט</button>
             </div>
 
             <div class="joke-display">
@@ -920,7 +941,10 @@
             school: '🏫 בית ספר',
             food: '🍕 אוכל',
             wordplay: '🎭 משחקי מילים',
-            family: '👨‍👩‍👧‍👦 משפחה'
+            family: '👨‍👩‍👧‍👦 משפחה',
+            doctors: '🏥 רופאים',
+            computers: '💻 מחשבים',
+            sports: '⚽ ספורט'
         };
 
         const ratingMessages = {
