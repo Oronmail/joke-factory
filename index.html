@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מפעל הבדיחות לילדים</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            height: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 220px 1fr 220px;
+            gap: 12px;
+        }
+
+        @media (max-width: 1000px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr auto auto;
+            }
+            .sidebar {
+                max-height: 120px !important;
+            }
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.8em;
+        }
+
+        .emoji-title {
+            font-size: 1em;
+        }
+
+        /* קטגוריות */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            border: 3px solid transparent;
+            border-radius: 20px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+            position: relative;
+            opacity: 0.7;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+            opacity: 0.9;
+        }
+
+        .category-btn.active {
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.35);
+            opacity: 1;
+            border-color: #333;
+        }
+
+        .category-btn[data-category="animals"] {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .category-btn[data-category="school"] {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .category-btn[data-category="food"] {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .category-btn[data-category="wordplay"] {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .category-btn[data-category="family"] {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            color: white;
+        }
+
+        .joke-display {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
+        }
+
+        .joke-display::before {
+            content: '😂';
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .joke-text {
+            font-size: 1.8em;
+            line-height: 1.6;
+            color: #333;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .joke-text.empty {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* מערכת דירוג - בתוך הבדיחה */
+        .rating-container {
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-top: auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+        }
+
+        .rating-title {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            direction: ltr;
+        }
+
+        .star-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star {
+            font-size: 2.2em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star:hover,
+        .star.hovered {
+            transform: scale(1.3);
+        }
+
+        .star.selected {
+            transform: scale(1.2);
+        }
+
+        .star:not(.selected):not(.hovered) {
+            filter: grayscale(0.6);
+            opacity: 0.6;
+        }
+
+        .star-percent {
+            font-size: 0.75em;
+            color: #666;
+            font-weight: bold;
+            min-width: 35px;
+        }
+
+        .rating-feedback {
+            margin-top: 8px;
+            font-size: 1em;
+            color: #333;
+            min-height: 22px;
+            font-weight: bold;
+        }
+
+        .rating-disabled {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .new-joke-btn {
+            padding: 12px 35px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .new-joke-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .joke-counter {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* Sidebars */
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-title {
+            text-align: center;
+            color: #333;
+            font-size: 0.95em;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-item {
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-size: 0.75em;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover {
+            background: #e9ecef;
+        }
+
+        .sidebar-item .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .sidebar-item .category-tag {
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 6px;
+            font-size: 0.65em;
+            color: white;
+        }
+
+        .sidebar-item .item-rating {
+            font-size: 0.85em;
+        }
+
+        .sidebar-item .vote-count {
+            font-size: 0.7em;
+            color: #888;
+        }
+
+        .sidebar-item .category-tag.animals { background: #f5576c; }
+        .sidebar-item .category-tag.school { background: #4facfe; }
+        .sidebar-item .category-tag.food { background: #43e97b; }
+        .sidebar-item .category-tag.wordplay { background: #fa709a; }
+        .sidebar-item .category-tag.family { background: #a18cd1; }
+
+        .sidebar-item.my-rating {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-right: 3px solid #4caf50;
+        }
+
+        .my-vote-tag {
+            background: #4caf50;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.65em;
+            font-weight: bold;
+        }
+
+        .empty-sidebar {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 12px;
+            font-size: 0.8em;
+        }
+
+        .sidebar-footer {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            padding-top: 6px;
+            border-top: 1px solid #eee;
+            margin-top: 6px;
+            font-size: 0.75em;
+        }
+
+        .clear-btn {
+            padding: 4px 8px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.75em;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: #c82333;
+        }
+
+        .save-favorite-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.9);
+            border: 3px solid #e91e63;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.6em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .speak-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: 3px solid #2196f3;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.6em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .speak-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+            background: #fff;
+        }
+
+        .speak-btn.speaking {
+            background: #2196f3;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .save-favorite-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+            background: #fff;
+        }
+
+        .save-favorite-btn.saved {
+            background: #e91e63;
+            animation: heartBeat 0.4s ease;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Ratings sidebar specific */
+        .ratings-sidebar {
+            border-right: 3px solid #667eea;
+        }
+
+        /* Favorites sidebar specific */
+        .favorites-sidebar {
+            border-left: 3px solid #f5576c;
+        }
+
+        .favorites-sidebar .sidebar-item {
+            border-right: 3px solid #f5576c;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .joke-text.animate {
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* Mobile Menu - Hidden by default */
+        .mobile-menu-toggle,
+        .mobile-menu-overlay {
+            display: none;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body {
+                overflow: hidden;
+                height: 100%;
+            }
+
+            body {
+                padding: 5px;
+                height: 100vh;
+                height: 100dvh;
+            }
+
+            /* Hide sidebars on mobile */
+            .sidebar {
+                display: none !important;
+            }
+
+            /* Single column layout - full screen */
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                height: 100%;
+            }
+
+            /* Mobile Menu Toggle Button */
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 12px;
+                left: 12px;
+                z-index: 100;
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 1.5em;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+
+            /* Mobile Menu Overlay */
+            .mobile-menu-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 200;
+                display: none;
+                justify-content: flex-start;
+            }
+
+            .mobile-menu-overlay.open {
+                display: flex;
+            }
+
+            /* Mobile Menu Panel */
+            .mobile-menu {
+                background: white;
+                width: 85%;
+                max-width: 320px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.3s ease;
+            }
+
+            @keyframes slideIn {
+                from { transform: translateX(-100%); }
+                to { transform: translateX(0); }
+            }
+
+            .mobile-menu-close {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 35px;
+                height: 35px;
+                background: #f0f0f0;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.2em;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Mobile Tabs */
+            .mobile-tabs {
+                display: flex;
+                padding: 50px 10px 10px;
+                gap: 8px;
+            }
+
+            .mobile-tab {
+                flex: 1;
+                padding: 12px;
+                border: none;
+                border-radius: 10px;
+                font-size: 0.9em;
+                font-family: inherit;
+                cursor: pointer;
+                background: #f0f0f0;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-tab.active {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }
+
+            /* Mobile Tab Content */
+            .mobile-tab-content {
+                flex: 1;
+                overflow-y: auto;
+                padding: 10px;
+            }
+
+            .mobile-tab-content .sidebar-item {
+                background: #f8f9fa;
+                padding: 12px;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                font-size: 0.85em;
+            }
+
+            .mobile-tab-content .empty-sidebar {
+                text-align: center;
+                color: #999;
+                padding: 20px;
+            }
+
+            /* Mobile Footer */
+            .mobile-footer {
+                padding: 10px;
+                border-top: 1px solid #eee;
+                font-size: 0.85em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            /* Main content adjustments - fit in one screen */
+            .main-content {
+                padding: 8px;
+                padding-top: 50px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            h1 {
+                font-size: 1.1em;
+                margin-bottom: 6px;
+                flex-shrink: 0;
+            }
+
+            .emoji-title {
+                font-size: 0.85em;
+            }
+
+            /* Categories - compact */
+            .categories {
+                gap: 4px;
+                margin-bottom: 6px;
+                flex-shrink: 0;
+            }
+
+            .category-btn {
+                padding: 4px 8px;
+                font-size: 0.7em;
+                border-width: 2px;
+            }
+
+            /* Joke display - flexible height */
+            .joke-display {
+                padding: 12px 10px;
+                min-height: 0;
+                flex: 1;
+                overflow: hidden;
+            }
+
+            .joke-display::before {
+                font-size: 50px;
+            }
+
+            .joke-text {
+                font-size: 1.1em;
+                line-height: 1.4;
+                overflow-y: auto;
+            }
+
+            /* Action buttons - smaller */
+            .save-favorite-btn,
+            .speak-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1em;
+                border-width: 2px;
+                top: 6px;
+            }
+
+            .save-favorite-btn { left: 6px; }
+            .speak-btn { right: 6px; }
+
+            /* Rating - compact */
+            .rating-container {
+                padding: 6px 8px;
+                margin-top: 8px;
+            }
+
+            .rating-title {
+                font-size: 0.75em;
+                margin-bottom: 4px;
+            }
+
+            .rating-stars {
+                gap: 4px;
+            }
+
+            .star {
+                font-size: 1.4em;
+            }
+
+            .star-percent {
+                font-size: 0.6em;
+            }
+
+            .rating-feedback {
+                font-size: 0.75em;
+                margin-top: 4px;
+                min-height: 16px;
+            }
+
+            /* Bottom row - compact */
+            .bottom-row {
+                gap: 10px;
+                margin-top: 6px;
+                flex-shrink: 0;
+            }
+
+            .new-joke-btn {
+                padding: 8px 20px;
+                font-size: 0.9em;
+            }
+
+            .joke-counter {
+                font-size: 0.7em;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .category-btn {
+                padding: 3px 6px;
+                font-size: 0.65em;
+            }
+
+            h1 {
+                font-size: 1em;
+            }
+
+            .star {
+                font-size: 1.2em;
+            }
+
+            .rating-stars {
+                gap: 2px;
+            }
+
+            .joke-text {
+                font-size: 1em;
+            }
+
+            .new-joke-btn {
+                padding: 6px 16px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu">
+            <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
+            <div class="mobile-tabs">
+                <button class="mobile-tab active" data-tab="ratings">📊 דירוגים</button>
+                <button class="mobile-tab" data-tab="favorites">❤️ מועדפים</button>
+            </div>
+            <div class="mobile-tab-content" id="mobileTabContent">
+                <!-- תוכן הטאב הפעיל -->
+            </div>
+            <div class="mobile-footer" id="mobileFooter">
+                <!-- footer לפי הטאב -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- עמודת דירוגים כלליים -->
+        <div class="sidebar ratings-sidebar">
+            <h2 class="sidebar-title">📊 דירוגים</h2>
+            <ul class="sidebar-list" id="ratingsList">
+                <li class="empty-sidebar">אין עדיין דירוגים...</li>
+            </ul>
+            <div class="sidebar-footer">
+                <span>ממוצע: <span id="avgRating">---</span></span>
+            </div>
+        </div>
+
+        <!-- תוכן ראשי -->
+        <div class="main-content">
+            <h1><span class="emoji-title">🎪</span> מפעל הבדיחות <span class="emoji-title">🎪</span></h1>
+
+            <div class="categories">
+                <button class="category-btn active" data-category="animals">🐾 חיות</button>
+                <button class="category-btn" data-category="school">🏫 בית ספר</button>
+                <button class="category-btn" data-category="food">🍕 אוכל</button>
+                <button class="category-btn" data-category="wordplay">🎭 משחקי מילים</button>
+                <button class="category-btn" data-category="family">👨‍👩‍👧‍👦 משפחה</button>
+            </div>
+
+            <div class="joke-display">
+                <button class="save-favorite-btn" id="saveFavoriteBtn" title="שמור למועדפים">🤍</button>
+                <button class="speak-btn" id="speakBtn" title="הקרא את הבדיחה">🔊</button>
+                <p class="joke-text empty" id="jokeText">טוען בדיחות...</p>
+
+                <div class="rating-container rating-disabled" id="ratingContainer">
+                    <div class="rating-title">איך הייתה הבדיחה?</div>
+                    <div class="rating-stars" id="ratingStars">
+                        <div class="star-wrapper">
+                            <span class="star" data-rating="1" title="לא מצחיק">😐</span>
+                            <span class="star-percent" id="percent1">0%</span>
+                        </div>
+                        <div class="star-wrapper">
+                            <span class="star" data-rating="2" title="קצת מצחיק">🙂</span>
+                            <span class="star-percent" id="percent2">0%</span>
+                        </div>
+                        <div class="star-wrapper">
+                            <span class="star" data-rating="3" title="מצחיק">😄</span>
+                            <span class="star-percent" id="percent3">0%</span>
+                        </div>
+                        <div class="star-wrapper">
+                            <span class="star" data-rating="4" title="מאוד מצחיק">😂</span>
+                            <span class="star-percent" id="percent4">0%</span>
+                        </div>
+                        <div class="star-wrapper">
+                            <span class="star" data-rating="5" title="התגלגלתי!">🤣</span>
+                            <span class="star-percent" id="percent5">0%</span>
+                        </div>
+                    </div>
+                    <div class="rating-feedback" id="ratingFeedback"></div>
+                </div>
+            </div>
+
+            <div class="bottom-row">
+                <button class="new-joke-btn" id="newJokeBtn">🎲 בדיחה חדשה!</button>
+                <div class="joke-counter"><span id="jokeCount">0</span> בדיחות</div>
+            </div>
+        </div>
+
+        <!-- עמודת מועדפים אישיים -->
+        <div class="sidebar favorites-sidebar">
+            <h2 class="sidebar-title">❤️ המועדפים שלי</h2>
+            <ul class="sidebar-list" id="favoritesList">
+                <li class="empty-sidebar">לחץ על 🤍 לשמירה</li>
+            </ul>
+            <div class="sidebar-footer">
+                <button class="clear-btn" id="clearFavorites">🗑️ נקה</button>
+                <span id="favoritesCount">0</span> מועדפים
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA9-6V0dYFZIIuGMSe7Uu0SiNBITrMG3uk",
+            authDomain: "bar-sjokefactory.firebaseapp.com",
+            projectId: "bar-sjokefactory",
+            storageBucket: "bar-sjokefactory.firebasestorage.app",
+            messagingSenderId: "1084220751714",
+            appId: "1:1084220751714:web:aba8758a48d0d2c735763b",
+            measurementId: "G-WPYK07WDWH"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // משתנים גלובליים
+        let jokes = {};
+        let currentCategory = 'animals';
+        let currentJoke = null;
+        let currentJokeRated = false;
+        let usedJokes = {};
+        let jokeCount = 0;
+
+        // מועדפים (נשמרים ב-localStorage - אישי לכל משתמש)
+        let favorites = JSON.parse(localStorage.getItem('jokeFavorites') || '[]');
+
+        // דירוגים שהמשתמש הנוכחי עשה (נשמרים ב-localStorage)
+        let myRatings = JSON.parse(localStorage.getItem('myJokeRatings') || '{}');
+
+        // דירוגים (נטענים מ-Firebase)
+        let allRatings = {};
+
+        // שמות קטגוריות
+        const categoryNames = {
+            animals: '🐾 חיות',
+            school: '🏫 בית ספר',
+            food: '🍕 אוכל',
+            wordplay: '🎭 משחקי מילים',
+            family: '👨‍👩‍👧‍👦 משפחה'
+        };
+
+        const ratingMessages = {
+            1: '😕 נמשיך הלאה!',
+            2: '😐 לא הכי...',
+            3: '🙂 חייכתי!',
+            4: '😄 מצחיק!',
+            5: '🤣 התגלגלתי!'
+        };
+
+        const ratingEmojis = ['😐', '🙂', '😄', '😂', '🤣'];
+
+        // אלמנטים
+        const jokeText = document.getElementById('jokeText');
+        const newJokeBtn = document.getElementById('newJokeBtn');
+        const ratingsList = document.getElementById('ratingsList');
+        const favoritesList = document.getElementById('favoritesList');
+        const clearFavoritesBtn = document.getElementById('clearFavorites');
+        const jokeCountSpan = document.getElementById('jokeCount');
+        const favoritesCountSpan = document.getElementById('favoritesCount');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const ratingContainer = document.getElementById('ratingContainer');
+        const ratingStars = document.querySelectorAll('.star');
+        const ratingFeedback = document.getElementById('ratingFeedback');
+        const avgRatingSpan = document.getElementById('avgRating');
+        const saveFavoriteBtn = document.getElementById('saveFavoriteBtn');
+        const speakBtn = document.getElementById('speakBtn');
+
+        // משתנים להקראה
+        let isSpeaking = false;
+
+        // פונקציית הקראה
+        function speakJoke() {
+            if (!currentJoke || !currentJoke.text || currentJoke.text.includes('לחצו על')) return;
+
+            // אם מקריאים כרגע - עצור
+            if (isSpeaking) {
+                window.speechSynthesis.cancel();
+                isSpeaking = false;
+                speakBtn.textContent = '🔊';
+                speakBtn.classList.remove('speaking');
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(currentJoke.text);
+            utterance.lang = 'he-IL';
+            utterance.rate = 0.9;
+            utterance.pitch = 1.1;
+
+            // מחפש קול עברי
+            const voices = window.speechSynthesis.getVoices();
+            const hebrewVoice = voices.find(v => v.lang.includes('he') || v.lang.includes('iw'));
+            if (hebrewVoice) {
+                utterance.voice = hebrewVoice;
+            }
+
+            utterance.onstart = () => {
+                isSpeaking = true;
+                speakBtn.textContent = '🔇';
+                speakBtn.classList.add('speaking');
+            };
+
+            utterance.onend = () => {
+                isSpeaking = false;
+                speakBtn.textContent = '🔊';
+                speakBtn.classList.remove('speaking');
+            };
+
+            utterance.onerror = () => {
+                isSpeaking = false;
+                speakBtn.textContent = '🔊';
+                speakBtn.classList.remove('speaking');
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // טעינת קולות (נדרש לחלק מהדפדפנים)
+        if (window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
+        // טעינת בדיחות מקובץ חיצוני
+        async function loadJokes() {
+            try {
+                const response = await fetch('jokes.json');
+                jokes = await response.json();
+
+                Object.keys(jokes).forEach(cat => {
+                    usedJokes[cat] = [];
+                });
+
+                jokeText.textContent = 'לחצו על "בדיחה חדשה" כדי להתחיל!';
+                jokeText.classList.add('empty');
+
+                // טעינת מועדפים
+                renderFavoritesList();
+            } catch (error) {
+                jokeText.textContent = 'שגיאה בטעינת הבדיחות. רענן את הדף.';
+                console.error('Error loading jokes:', error);
+            }
+        }
+
+        // פונקציה להצגת בדיחה חדשה
+        function showNewJoke() {
+            if (!jokes[currentCategory]) return;
+
+            const categoryJokes = jokes[currentCategory];
+            const unusedJokes = categoryJokes.filter((_, index) => !usedJokes[currentCategory].includes(index));
+
+            if (unusedJokes.length === 0) {
+                usedJokes[currentCategory] = [];
+                showNewJoke();
+                return;
+            }
+
+            const availableIndices = categoryJokes.map((_, index) => index).filter(index => !usedJokes[currentCategory].includes(index));
+            const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+            const joke = categoryJokes[randomIndex];
+
+            usedJokes[currentCategory].push(randomIndex);
+
+            currentJoke = { text: joke, category: currentCategory };
+            currentJokeRated = false;
+
+            jokeText.classList.remove('animate', 'empty');
+            void jokeText.offsetWidth;
+            jokeText.classList.add('animate');
+            jokeText.textContent = joke;
+
+            resetRating();
+            ratingContainer.classList.remove('rating-disabled');
+            updateFavoriteButton();
+            updateCurrentJokePercentages();
+
+            jokeCount++;
+            jokeCountSpan.textContent = jokeCount;
+        }
+
+        // איפוס דירוג
+        function resetRating() {
+            ratingStars.forEach(star => {
+                star.classList.remove('selected', 'hovered');
+            });
+            ratingFeedback.textContent = '';
+        }
+
+        // פונקציה לדירוג - שומר ל-Firebase
+        async function rateJoke(rating) {
+            if (currentJokeRated || !currentJoke) return;
+
+            currentJokeRated = true;
+
+            ratingStars.forEach(star => {
+                const starRating = parseInt(star.dataset.rating);
+                star.classList.toggle('selected', starRating === rating);
+            });
+
+            ratingFeedback.textContent = ratingMessages[rating];
+
+            // שמירת דירוג ל-Firebase
+            const jokeKey = currentJoke.text.substring(0, 50).replace(/[\/\.#$\[\]]/g, '_');
+
+            // שמירת הדירוג גם ב-localStorage של המשתמש
+            myRatings[jokeKey] = rating;
+            localStorage.setItem('myJokeRatings', JSON.stringify(myRatings));
+
+            try {
+                const docRef = db.collection('ratings').doc(jokeKey);
+                const doc = await docRef.get();
+
+                if (doc.exists) {
+                    // עדכון דירוג קיים עם התפלגות
+                    const updateData = {
+                        total: firebase.firestore.FieldValue.increment(rating),
+                        count: firebase.firestore.FieldValue.increment(1)
+                    };
+                    updateData[`votes${rating}`] = firebase.firestore.FieldValue.increment(1);
+                    await docRef.update(updateData);
+                } else {
+                    // יצירת דירוג חדש עם התפלגות
+                    const newData = {
+                        joke: currentJoke.text,
+                        category: currentJoke.category,
+                        total: rating,
+                        count: 1,
+                        votes1: 0, votes2: 0, votes3: 0, votes4: 0, votes5: 0
+                    };
+                    newData[`votes${rating}`] = 1;
+                    await docRef.set(newData);
+                }
+
+                // עדכון תצוגת הדירוגים
+                renderRatingsList();
+            } catch (error) {
+                console.error('Error saving rating to Firebase:', error);
+            }
+        }
+
+        // עדכון דירוג ממוצע כללי
+        function updateAverageRating() {
+            const keys = Object.keys(allRatings);
+            if (keys.length === 0) {
+                avgRatingSpan.textContent = '---';
+                return;
+            }
+
+            let totalSum = 0;
+            let totalCount = 0;
+            keys.forEach(key => {
+                totalSum += allRatings[key].total;
+                totalCount += allRatings[key].count;
+            });
+
+            const avg = totalSum / totalCount;
+            const avgEmoji = ratingEmojis[Math.round(avg) - 1] || '😄';
+            avgRatingSpan.textContent = `${avgEmoji} ${avg.toFixed(1)}`;
+        }
+
+        // הצגת רשימת דירוגים
+        function renderRatingsList() {
+            const keys = Object.keys(allRatings);
+
+            if (keys.length === 0) {
+                ratingsList.innerHTML = '<li class="empty-sidebar">אין עדיין דירוגים...</li>';
+                return;
+            }
+
+            // מיון לפי ממוצע
+            const sorted = keys
+                .map(key => ({ key, ...allRatings[key], avg: allRatings[key].total / allRatings[key].count }))
+                .sort((a, b) => b.avg - a.avg)
+                .slice(0, 15);
+
+            ratingsList.innerHTML = sorted.map(item => {
+                const isMine = myRatings[item.key] !== undefined;
+                const myRatingEmoji = isMine ? ratingEmojis[myRatings[item.key] - 1] : '';
+                return `
+                <li class="sidebar-item ${isMine ? 'my-rating' : ''}" onclick="showJoke('${item.joke.replace(/'/g, "\\'")}')">
+                    <div class="item-header">
+                        <span class="category-tag ${item.category}">${categoryNames[item.category]?.split(' ')[1] || ''}</span>
+                        ${isMine ? `<span class="my-vote-tag">דירגתי ${myRatingEmoji}</span>` : ''}
+                        <span class="item-rating">${ratingEmojis[Math.round(item.avg) - 1] || ''}</span>
+                    </div>
+                    <p>${item.joke.length > 40 ? item.joke.substring(0, 40) + '...' : item.joke}</p>
+                    <span class="vote-count">${item.count} הצבעות</span>
+                </li>
+            `}).join('');
+        }
+
+        // האזנה לשינויים ב-Firebase (real-time)
+        function listenToRatings() {
+            db.collection('ratings').onSnapshot((snapshot) => {
+                allRatings = {};
+                snapshot.forEach((doc) => {
+                    allRatings[doc.id] = doc.data();
+                });
+                renderRatingsList();
+                updateAverageRating();
+                updateCurrentJokePercentages();
+            }, (error) => {
+                console.error('Error listening to ratings:', error);
+            });
+        }
+
+        // עדכון אחוזי הצבעה לבדיחה הנוכחית
+        function updateCurrentJokePercentages() {
+            if (!currentJoke) {
+                // אין בדיחה - אפס את האחוזים
+                for (let i = 1; i <= 5; i++) {
+                    const percentEl = document.getElementById(`percent${i}`);
+                    if (percentEl) percentEl.textContent = '-';
+                }
+                return;
+            }
+
+            // מחפשים את הדירוג של הבדיחה הנוכחית
+            const jokeKey = currentJoke.text.substring(0, 50).replace(/[\/\.#$\[\]]/g, '_');
+            const jokeRating = allRatings[jokeKey];
+
+            if (!jokeRating || !jokeRating.count) {
+                // אין עדיין הצבעות לבדיחה זו
+                for (let i = 1; i <= 5; i++) {
+                    const percentEl = document.getElementById(`percent${i}`);
+                    if (percentEl) percentEl.textContent = '-';
+                }
+                return;
+            }
+
+            // חישוב האחוזים לבדיחה הספציפית
+            const totalVotes = jokeRating.count;
+            for (let i = 1; i <= 5; i++) {
+                const percentEl = document.getElementById(`percent${i}`);
+                if (percentEl) {
+                    const votes = jokeRating[`votes${i}`] || 0;
+                    const percent = Math.round((votes / totalVotes) * 100);
+                    percentEl.textContent = `${percent}%`;
+                }
+            }
+        }
+
+        // הצגת רשימת מועדפים
+        function renderFavoritesList() {
+            favoritesCountSpan.textContent = favorites.length;
+
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<li class="empty-sidebar">לחץ על 🤍 לשמירה</li>';
+                return;
+            }
+
+            favoritesList.innerHTML = favorites.map((item, index) => `
+                <li class="sidebar-item" onclick="showJoke('${item.joke.replace(/'/g, "\\'")}')">
+                    <div class="item-header">
+                        <span class="category-tag ${item.category}">${categoryNames[item.category]?.split(' ')[1] || ''}</span>
+                        <span class="item-rating" onclick="event.stopPropagation(); removeFavorite(${index})" style="cursor:pointer">❌</span>
+                    </div>
+                    <p>${item.joke.length > 40 ? item.joke.substring(0, 40) + '...' : item.joke}</p>
+                </li>
+            `).join('');
+        }
+
+        // הצגת בדיחה ספציפית
+        function showJoke(joke) {
+            jokeText.classList.remove('animate', 'empty');
+            void jokeText.offsetWidth;
+            jokeText.classList.add('animate');
+            jokeText.textContent = joke;
+            ratingContainer.classList.add('rating-disabled');
+
+            // מציאת הקטגוריה
+            for (const cat of Object.keys(jokes)) {
+                if (jokes[cat].includes(joke)) {
+                    currentJoke = { text: joke, category: cat };
+                    break;
+                }
+            }
+            updateFavoriteButton();
+            updateCurrentJokePercentages();
+        }
+
+        // עדכון כפתור מועדפים
+        function updateFavoriteButton() {
+            if (!currentJoke) return;
+            const isFavorite = favorites.some(f => f.joke === currentJoke.text);
+            saveFavoriteBtn.textContent = isFavorite ? '❤️' : '🤍';
+            saveFavoriteBtn.classList.toggle('saved', isFavorite);
+        }
+
+        // שמירה/הסרה ממועדפים
+        function toggleFavorite() {
+            if (!currentJoke || !currentJoke.text || currentJoke.text.includes('לחצו על')) return;
+
+            const index = favorites.findIndex(f => f.joke === currentJoke.text);
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.unshift({ joke: currentJoke.text, category: currentJoke.category });
+            }
+
+            localStorage.setItem('jokeFavorites', JSON.stringify(favorites));
+            updateFavoriteButton();
+            renderFavoritesList();
+        }
+
+        // הסרת מועדף
+        function removeFavorite(index) {
+            favorites.splice(index, 1);
+            localStorage.setItem('jokeFavorites', JSON.stringify(favorites));
+            renderFavoritesList();
+            updateFavoriteButton();
+        }
+
+        // ניקוי מועדפים
+        function clearFavorites() {
+            favorites = [];
+            localStorage.setItem('jokeFavorites', '[]');
+            renderFavoritesList();
+            updateFavoriteButton();
+        }
+
+        // פונקציה להחלפת קטגוריה
+        function changeCategory(category) {
+            currentCategory = category;
+            categoryBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+        }
+
+        // Event Listeners
+        newJokeBtn.addEventListener('click', showNewJoke);
+        clearFavoritesBtn.addEventListener('click', clearFavorites);
+        saveFavoriteBtn.addEventListener('click', toggleFavorite);
+        speakBtn.addEventListener('click', speakJoke);
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                changeCategory(btn.dataset.category);
+            });
+        });
+
+        ratingStars.forEach(star => {
+            star.addEventListener('click', () => {
+                rateJoke(parseInt(star.dataset.rating));
+            });
+
+            star.addEventListener('mouseenter', () => {
+                if (currentJokeRated) return;
+                const rating = parseInt(star.dataset.rating);
+                ratingStars.forEach(s => {
+                    s.classList.toggle('hovered', parseInt(s.dataset.rating) === rating);
+                });
+            });
+
+            star.addEventListener('mouseleave', () => {
+                if (currentJokeRated) return;
+                ratingStars.forEach(s => s.classList.remove('hovered'));
+            });
+        });
+
+        // Mobile Menu Elements
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileTabs = document.querySelectorAll('.mobile-tab');
+        const mobileTabContent = document.getElementById('mobileTabContent');
+        const mobileFooter = document.getElementById('mobileFooter');
+
+        let currentMobileTab = 'ratings';
+
+        // פתיחת תפריט מובייל
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('open');
+            updateMobileTabContent(currentMobileTab);
+        });
+
+        // סגירת תפריט מובייל
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('open');
+        });
+
+        // סגירה בלחיצה על הרקע
+        mobileMenuOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('open');
+            }
+        });
+
+        // החלפת טאבים במובייל
+        mobileTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                mobileTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentMobileTab = tab.dataset.tab;
+                updateMobileTabContent(currentMobileTab);
+            });
+        });
+
+        // עדכון תוכן הטאב במובייל
+        function updateMobileTabContent(tab) {
+            if (tab === 'ratings') {
+                mobileTabContent.innerHTML = ratingsList.innerHTML;
+                mobileFooter.innerHTML = `<span>ממוצע: ${avgRatingSpan.textContent}</span>`;
+            } else {
+                mobileTabContent.innerHTML = favoritesList.innerHTML;
+                mobileFooter.innerHTML = `
+                    <button class="clear-btn" onclick="clearFavorites(); updateMobileTabContent('favorites');">🗑️ נקה</button>
+                    <span>${favorites.length} מועדפים</span>
+                `;
+            }
+
+            // הוספת event listeners לפריטים
+            mobileTabContent.querySelectorAll('.sidebar-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const jokeText = item.querySelector('p').textContent;
+                    // מחפש את הבדיחה המלאה
+                    for (const cat of Object.keys(jokes)) {
+                        const fullJoke = jokes[cat].find(j => j.startsWith(jokeText.replace('...', '')));
+                        if (fullJoke) {
+                            showJoke(fullJoke);
+                            mobileMenuOverlay.classList.remove('open');
+                            break;
+                        }
+                    }
+                });
+            });
+        }
+
+        // עדכון תפריט מובייל כשמתעדכנים הדירוגים
+        const originalRenderRatingsList = renderRatingsList;
+        renderRatingsList = function() {
+            originalRenderRatingsList();
+            if (mobileMenuOverlay.classList.contains('open') && currentMobileTab === 'ratings') {
+                updateMobileTabContent('ratings');
+            }
+        };
+
+        const originalRenderFavoritesList = renderFavoritesList;
+        renderFavoritesList = function() {
+            originalRenderFavoritesList();
+            if (mobileMenuOverlay.classList.contains('open') && currentMobileTab === 'favorites') {
+                updateMobileTabContent('favorites');
+            }
+        };
+
+        // טעינה ראשונית
+        loadJokes();
+        listenToRatings(); // האזנה לדירוגים מ-Firebase בזמן אמת
+    </script>
+</body>
+</html>
