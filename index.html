@@ -613,12 +613,13 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
+            padding: 10px;
             height: 100%;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             border-radius: 15px;
             position: relative;
             overflow: hidden;
+            justify-content: space-between;
         }
 
         .roblox-panel::before {
@@ -645,8 +646,8 @@
         }
 
         .roblox-panel h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.4em;
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
             background: linear-gradient(90deg, #ff6b9d, #c44569, #6c5ce7, #a29bfe);
             background-size: 300% 300%;
             -webkit-background-clip: text;
@@ -666,15 +667,15 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
 
         .aura-display {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: bold;
             color: #fff;
             text-shadow: 0 0 20px rgba(255,107,157,0.8);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             transition: all 0.3s ease;
         }
 
@@ -704,23 +705,23 @@
 
         .aura-label {
             color: #a29bfe;
-            font-size: 0.9em;
-            margin-bottom: 10px;
+            font-size: 0.8em;
+            margin-bottom: 5px;
         }
 
         .aura-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 5px;
             justify-content: center;
         }
 
         .aura-btn {
-            padding: 10px 16px;
+            padding: 6px 12px;
             border: none;
-            border-radius: 20px;
+            border-radius: 15px;
             font-family: inherit;
-            font-size: 0.85em;
+            font-size: 0.75em;
             cursor: pointer;
             transition: all 0.2s ease;
             font-weight: bold;
@@ -755,29 +756,29 @@
             width: 100%;
             max-width: 450px;
             text-align: center;
-            margin-bottom: 15px;
-            padding: 15px;
+            margin-bottom: 8px;
+            padding: 10px;
             background: rgba(0,0,0,0.3);
-            border-radius: 15px;
+            border-radius: 12px;
             border: 2px solid rgba(255,107,157,0.3);
         }
 
         .roast-title {
             color: #ff6b9d;
-            font-size: 1em;
-            margin-bottom: 10px;
+            font-size: 0.9em;
+            margin-bottom: 5px;
             font-weight: bold;
         }
 
         .roast-display {
-            font-size: 1.2em;
+            font-size: 1em;
             color: #fff;
-            line-height: 1.4;
-            min-height: 50px;
+            line-height: 1.3;
+            min-height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 5px;
         }
 
         .roast-display.new {
@@ -790,13 +791,13 @@
         }
 
         .roast-btn {
-            padding: 12px 30px;
+            padding: 8px 20px;
             background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
             color: #fff;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             font-family: inherit;
-            font-size: 1em;
+            font-size: 0.85em;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
@@ -812,41 +813,41 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
-            padding: 15px;
+            padding: 10px;
             background: rgba(108,92,231,0.2);
-            border-radius: 15px;
+            border-radius: 12px;
             border: 2px solid rgba(108,92,231,0.4);
         }
 
         .quiz-title {
             color: #a29bfe;
-            font-size: 1em;
-            margin-bottom: 15px;
+            font-size: 0.9em;
+            margin-bottom: 8px;
             font-weight: bold;
         }
 
         .quiz-result {
-            font-size: 1.8em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-shadow: 0 0 15px rgba(162,155,254,0.8);
         }
 
         .quiz-description {
             color: #ddd;
-            font-size: 0.9em;
-            margin-bottom: 15px;
+            font-size: 0.8em;
+            margin-bottom: 8px;
         }
 
         .quiz-btn {
-            padding: 12px 30px;
+            padding: 8px 20px;
             background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
             color: #fff;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             font-family: inherit;
-            font-size: 1em;
+            font-size: 0.85em;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
@@ -1349,34 +1350,34 @@
 
             <!-- ROBLOX Zone Panel -->
             <div class="roblox-panel" id="robloxPanel">
-                <h3>🎮 BRAINROT ZONE 🧠</h3>
+                <h3>🎮 אזור הבריינרוט 🧠</h3>
 
                 <!-- Aura Meter -->
                 <div class="aura-section">
                     <div class="aura-display" id="auraDisplay">0</div>
-                    <div class="aura-label">✨ Your Aura ✨</div>
+                    <div class="aura-label">✨ האורה שלך ✨</div>
                     <div class="aura-buttons">
-                        <button class="aura-btn gain" data-aura="1000">+1000 Rizz</button>
-                        <button class="aura-btn gain" data-aura="500">+500 Sigma</button>
-                        <button class="aura-btn lose" data-aura="-500">-500 Ohio</button>
-                        <button class="aura-btn lose" data-aura="-1000">-1000 L</button>
-                        <button class="aura-btn steal" id="fanum-tax">🍟 Fanum Tax</button>
+                        <button class="aura-btn gain" data-aura="1000">ריז +1000</button>
+                        <button class="aura-btn gain" data-aura="500">סיגמה +500</button>
+                        <button class="aura-btn lose" data-aura="-500">אוהיו 500-</button>
+                        <button class="aura-btn lose" data-aura="-1000">הפסד 1000-</button>
+                        <button class="aura-btn steal" id="fanum-tax">🍟 מס פאנום</button>
                     </div>
                 </div>
 
                 <!-- Brainrot Roast Generator -->
                 <div class="roast-section">
-                    <div class="roast-title">🔥 Brainrot Roast Generator 🔥</div>
-                    <div class="roast-display" id="roastDisplay">לחץ לקבל roast...</div>
-                    <button class="roast-btn" id="roastBtn">💀 Roast Me</button>
+                    <div class="roast-title">🔥 מחולל העלבונות 🔥</div>
+                    <div class="roast-display" id="roastDisplay">לחץ לקבל העלבה...</div>
+                    <button class="roast-btn" id="roastBtn">💀 תעליב אותי</button>
                 </div>
 
                 <!-- Brainrot Level Quiz -->
                 <div class="quiz-section">
-                    <div class="quiz-title">🧠 ?What's Your Brainrot Level</div>
+                    <div class="quiz-title">🧠 מה רמת הבריינרוט שלך?</div>
                     <div class="quiz-result" id="quizResult">???</div>
-                    <div class="quiz-description" id="quizDesc">לחץ לגלות כמה brainrot יש לך</div>
-                    <button class="quiz-btn" id="quizBtn">🎲 Check My Level</button>
+                    <div class="quiz-description" id="quizDesc">לחץ לגלות כמה בריינרוט יש לך</div>
+                    <button class="quiz-btn" id="quizBtn">🎲 בדוק את הרמה</button>
                     <div class="quiz-progress" id="quizProgress"></div>
                 </div>
             </div>
@@ -2123,32 +2124,32 @@
             updateAura(steal);
             fanumTaxBtn.textContent = `🍟 +${steal}!`;
             setTimeout(() => {
-                fanumTaxBtn.textContent = '🍟 Fanum Tax';
+                fanumTaxBtn.textContent = '🍟 מס פאנום';
             }, 1000);
         });
 
         // Brainrot Roast Generator
         const roasts = [
-            "You're so Ohio it physically hurts 💀",
-            "Your rizz is in the negative sigma zone",
-            "Bro really said 'skibidi' unironically 🚽",
-            "You got zero aura and it shows",
-            "Even Tung Tung Sahur has better vibes than you",
-            "Your Roblox avatar looks like it was made in 2012",
-            "You're the human equivalent of -1000 aura",
-            "Bro's brainrot level is off the charts... and not in a good way",
-            "You probably still play Adopt Me unironically",
-            "Your sigma grindset is actually just being alone",
-            "Even Bombardino Crocodilo wouldn't claim you",
-            "You're what happens when Ohio and L combine",
-            "Bro's entire existence is negative rizz",
-            "You got fanum taxed by life itself",
-            "Your aura is so low it's basically underground",
-            "Skibidi toilet has more personality than you 🚽",
-            "You're the reason parents don't understand brainrot",
-            "Bro peaked in the tutorial",
-            "Your whole vibe is just... mid",
-            "Even NPC's have better dialogue than you"
+            "אתה כזה אוהיו שזה פיזית כואב 💀",
+            "הריז שלך באזור הסיגמה השלילי",
+            "אחי באמת אמר 'סקיבידי' ברצינות 🚽",
+            "יש לך אפס אורה וזה ניכר",
+            "אפילו לטונג טונג סאהור יש וייבס יותר טובים ממך",
+            "האווטאר שלך ברובלוקס נראה כאילו עשו אותו ב-2012",
+            "אתה המקבילה האנושית של מינוס 1000 אורה",
+            "רמת הבריינרוט של אחי יצאה מהגרף... ולא בצורה טובה",
+            "אתה בטח עדיין משחק Adopt Me ברצינות",
+            "הסיגמה גריינדסט שלך זה בעצם סתם להיות לבד",
+            "אפילו בומברדינו קרוקודילו לא היה טוען לך",
+            "אתה מה שקורה כשאוהיו והפסד מתאחדים",
+            "כל הקיום של אחי זה ריז שלילי",
+            "החיים עצמם עשו לך מס פאנום",
+            "האורה שלך כל כך נמוכה שהיא בעצם מתחת לאדמה",
+            "לסקיבידי טואלט יש יותר אישיות ממך 🚽",
+            "אתה הסיבה שהורים לא מבינים בריינרוט",
+            "אחי הגיע לשיא בטוטוריאל",
+            "כל הווייב שלך פשוט... מיד",
+            "אפילו ל-NPC יש דיאלוג יותר טוב ממך"
         ];
 
         const roastDisplay = document.getElementById('roastDisplay');
@@ -2167,14 +2168,14 @@
 
         // Brainrot Level Quiz
         const brainrotLevels = [
-            { level: "0% - Pure Soul", desc: "איכשהו עדיין לא נפלת לתהום. Respect.", emoji: "😇" },
-            { level: "15% - Casual Viewer", desc: "צפית בכמה סרטונים. עדיין יש תקווה.", emoji: "🙂" },
-            { level: "35% - Getting There", desc: "מתחיל להבין את הממז. Ohio energy.", emoji: "😏" },
-            { level: "50% - Mid Brainrot", desc: "יודע מה זה Skibidi. מכיר את Tralalero.", emoji: "😵" },
-            { level: "69% - Nice Brainrot", desc: "Nice. הסלנג כבר חלק ממך.", emoji: "😎" },
-            { level: "80% - Sigma Level", desc: "רמת סיגמה. הbrainrot חזק בך.", emoji: "🗿" },
-            { level: "95% - Peak Ohio", desc: "Peak brainrot. אין דרך חזרה.", emoji: "💀" },
-            { level: "100% - Transcended", desc: "עברת מעבר לbrainrot. אתה עכשיו ה-brainrot.", emoji: "🧠" }
+            { level: "0% - נשמה טהורה", desc: "איכשהו עדיין לא נפלת לתהום. כבוד.", emoji: "😇" },
+            { level: "15% - צופה מזדמן", desc: "צפית בכמה סרטונים. עדיין יש תקווה.", emoji: "🙂" },
+            { level: "35% - בדרך לשם", desc: "מתחיל להבין את העניין. אנרגיית אוהיו.", emoji: "😏" },
+            { level: "50% - בריינרוט בינוני", desc: "יודע מה זה סקיבידי. מכיר את טרללרו.", emoji: "😵" },
+            { level: "69% - נייס בריינרוט", desc: "נייס. הסלנג כבר חלק ממך.", emoji: "😎" },
+            { level: "80% - רמת סיגמה", desc: "רמת סיגמה. הבריינרוט חזק בך.", emoji: "🗿" },
+            { level: "95% - שיא אוהיו", desc: "שיא הבריינרוט. אין דרך חזרה.", emoji: "💀" },
+            { level: "100% - התעלית", desc: "עברת מעבר לבריינרוט. אתה עכשיו הבריינרוט.", emoji: "🧠" }
         ];
 
         const quizResult = document.getElementById('quizResult');
@@ -2190,7 +2191,7 @@
                 // Start quiz animation
                 quizState = 'running';
                 quizClicks = 0;
-                quizBtn.textContent = '⏳ Calculating...';
+                quizBtn.textContent = '⏳ מחשב...';
                 quizResult.textContent = '🔄';
 
                 // Show progress dots
@@ -2215,7 +2216,7 @@
 
                     quizResult.textContent = `${result.emoji} ${result.level}`;
                     quizDesc.textContent = result.desc;
-                    quizBtn.textContent = '🎲 Try Again';
+                    quizBtn.textContent = '🎲 נסה שוב';
                     quizState = 'idle';
 
                     // Add aura based on result
