@@ -143,6 +143,18 @@
             color: white;
         }
 
+        .category-btn[data-category="roblox"] {
+            background: linear-gradient(135deg, #00ff88 0%, #9945ff 100%);
+            color: #000;
+            text-shadow: 0 0 5px rgba(0,255,136,0.5);
+            animation: neonPulse 2s infinite;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { box-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88; }
+            50% { box-shadow: 0 0 10px #9945ff, 0 0 20px #9945ff; }
+        }
+
         .joke-display {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border-radius: 15px;
@@ -601,6 +613,277 @@
             line-height: 1.2;
         }
 
+        /* ROBLOX Zone Panel */
+        .roblox-panel {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a1a0a 100%);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roblox-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(0,255,136,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(153,69,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .roblox-panel.active {
+            display: flex;
+        }
+
+        .roblox-panel h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.5em;
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            animation: glitch 3s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translateX(0); }
+            92% { transform: translateX(-2px); }
+            94% { transform: translateX(2px); }
+            96% { transform: translateX(-1px); }
+            98% { transform: translateX(1px); }
+        }
+
+        .roblox-subtitle {
+            color: #9945ff;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px #9945ff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roblox-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roblox-tab {
+            padding: 8px 16px;
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
+            border-radius: 20px;
+            color: #00ff88;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .roblox-tab:hover {
+            background: rgba(0,255,136,0.2);
+            box-shadow: 0 0 15px rgba(0,255,136,0.5);
+        }
+
+        .roblox-tab.active {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 0 20px #00ff88;
+        }
+
+        .roblox-content {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Brainrot Soundboard */
+        .brainrot-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 5px;
+        }
+
+        .brainrot-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 6px;
+            border: 2px solid #00ff88;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.5);
+            color: #00ff88;
+            font-family: inherit;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brainrot-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0,255,136,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .brainrot-btn:hover::before {
+            left: 100%;
+        }
+
+        .brainrot-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0,255,136,0.5), 0 0 40px rgba(153,69,255,0.3);
+            border-color: #9945ff;
+            color: #fff;
+        }
+
+        .brainrot-btn:active {
+            transform: scale(0.95);
+        }
+
+        .brainrot-btn.playing {
+            animation: brainrotPulse 0.4s ease;
+            background: linear-gradient(135deg, #00ff88 0%, #9945ff 100%);
+            color: #000;
+        }
+
+        @keyframes brainrotPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15) rotate(5deg); }
+            100% { transform: scale(1); }
+        }
+
+        .brainrot-btn .char-emoji {
+            font-size: 2em;
+            margin-bottom: 4px;
+        }
+
+        .brainrot-btn .char-name {
+            text-align: center;
+            line-height: 1.1;
+            font-weight: bold;
+        }
+
+        /* Name Generator */
+        .name-generator {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .name-generator.active {
+            display: flex;
+        }
+
+        .generated-name {
+            font-size: 2em;
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 30px #9945ff;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            min-width: 280px;
+            animation: nameGlow 2s infinite alternate;
+        }
+
+        @keyframes nameGlow {
+            from { text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
+            to { text-shadow: 0 0 20px #9945ff, 0 0 40px #9945ff, 0 0 60px #9945ff; }
+        }
+
+        .generate-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #00ff88 0%, #9945ff 100%);
+            color: #000;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0,255,136,0.5);
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0,255,136,0.8), 0 0 50px rgba(153,69,255,0.5);
+        }
+
+        .name-history {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            max-width: 400px;
+        }
+
+        .history-name {
+            padding: 5px 12px;
+            background: rgba(153,69,255,0.2);
+            border: 1px solid #9945ff;
+            border-radius: 15px;
+            color: #9945ff;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .history-name:hover {
+            background: rgba(153,69,255,0.4);
+            transform: scale(1.05);
+        }
+
+        /* Roblox volume control */
+        .roblox-volume {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roblox-volume span {
+            color: #00ff88;
+        }
+
+        .roblox-volume input[type="range"] {
+            width: 120px;
+            cursor: pointer;
+            accent-color: #00ff88;
+        }
+
         /* Mobile Menu - Hidden by default */
         .mobile-menu-toggle,
         .mobile-menu-overlay {
@@ -891,6 +1174,65 @@
                 font-size: 1.4em;
                 margin-bottom: 2px;
             }
+
+            /* Roblox panel mobile */
+            .roblox-panel {
+                padding: 10px;
+            }
+
+            .roblox-panel h3 {
+                font-size: 1.2em;
+                margin-bottom: 3px;
+            }
+
+            .roblox-subtitle {
+                font-size: 0.7em;
+                margin-bottom: 10px;
+            }
+
+            .roblox-tabs {
+                gap: 6px;
+                margin-bottom: 10px;
+            }
+
+            .roblox-tab {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+
+            .brainrot-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+            }
+
+            .brainrot-btn {
+                padding: 8px 4px;
+                font-size: 0.6em;
+            }
+
+            .brainrot-btn .char-emoji {
+                font-size: 1.5em;
+            }
+
+            .generated-name {
+                font-size: 1.3em;
+                padding: 15px;
+                min-width: 200px;
+            }
+
+            .generate-btn {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+
+            .name-history {
+                max-width: 300px;
+            }
+
+            .history-name {
+                font-size: 0.75em;
+                padding: 4px 10px;
+            }
         }
 
         /* Extra small screens */
@@ -973,6 +1315,7 @@
                 <button class="category-btn" data-category="computers">💻 מחשבים</button>
                 <button class="category-btn" data-category="sports">⚽ ספורט</button>
                 <button class="category-btn" data-category="farts">💨 פלוצים</button>
+                <button class="category-btn" data-category="roblox">🎮 ROBLOX</button>
             </div>
 
             <div class="joke-display">
@@ -1018,6 +1361,37 @@
                 </div>
                 <div class="farts-grid" id="fartsGrid">
                     <!-- כפתורי הפלוצים יתווספו ב-JavaScript -->
+                </div>
+            </div>
+
+            <!-- ROBLOX Zone Panel -->
+            <div class="roblox-panel" id="robloxPanel">
+                <h3>🎮 ROBLOX ZONE 🎮</h3>
+                <div class="roblox-subtitle">Italian Brainrot Soundboard</div>
+
+                <div class="roblox-tabs">
+                    <button class="roblox-tab active" data-roblox-tab="soundboard">🔊 Soundboard</button>
+                    <button class="roblox-tab" data-roblox-tab="generator">✨ מחולל שמות</button>
+                </div>
+
+                <div class="roblox-volume" id="robloxVolumeControl">
+                    <span>🔈</span>
+                    <input type="range" id="robloxVolume" min="0" max="100" value="80">
+                    <span>🔊</span>
+                </div>
+
+                <div class="roblox-content">
+                    <!-- Soundboard -->
+                    <div class="brainrot-grid active" id="brainrotGrid">
+                        <!-- כפתורי הדמויות יתווספו ב-JavaScript -->
+                    </div>
+
+                    <!-- Name Generator -->
+                    <div class="name-generator" id="nameGenerator">
+                        <div class="generated-name" id="generatedName">???</div>
+                        <button class="generate-btn" id="generateNameBtn">🎲 צור שם חדש!</button>
+                        <div class="name-history" id="nameHistory"></div>
+                    </div>
                 </div>
             </div>
 
@@ -1472,11 +1846,16 @@
                 btn.classList.toggle('active', btn.dataset.category === category);
             });
 
-            // בדיקה אם זו קטגוריית פלוצים
+            // בדיקה אם זו קטגוריית פלוצים או רובלוקס
             if (category === 'farts') {
                 showFartsPanel();
+                hideRobloxPanel();
+            } else if (category === 'roblox') {
+                showRobloxPanel();
+                hideFartsPanel();
             } else {
                 hideFartsPanel();
+                hideRobloxPanel();
                 showNewJoke();
             }
         }
@@ -1494,11 +1873,28 @@
 
         // הסתרת פאנל הפלוצים
         function hideFartsPanel() {
-            const jokeDisplay = document.querySelector('.joke-display');
             const fartsPanel = document.getElementById('fartsPanel');
+            fartsPanel.classList.remove('active');
+        }
+
+        // הצגת פאנל רובלוקס
+        function showRobloxPanel() {
+            const jokeDisplay = document.querySelector('.joke-display');
+            const robloxPanel = document.getElementById('robloxPanel');
             const bottomRow = document.querySelector('.bottom-row');
 
-            fartsPanel.classList.remove('active');
+            jokeDisplay.style.display = 'none';
+            bottomRow.style.display = 'none';
+            robloxPanel.classList.add('active');
+        }
+
+        // הסתרת פאנל רובלוקס
+        function hideRobloxPanel() {
+            const jokeDisplay = document.querySelector('.joke-display');
+            const robloxPanel = document.getElementById('robloxPanel');
+            const bottomRow = document.querySelector('.bottom-row');
+
+            robloxPanel.classList.remove('active');
             jokeDisplay.style.display = 'flex';
             bottomRow.style.display = 'flex';
         }
@@ -1688,6 +2084,256 @@
 
         // יצירת כפתורי הפלוצים בטעינה
         createFartButtons();
+
+        // ========== ROBLOX Zone - Italian Brainrot ==========
+        const robloxPanel = document.getElementById('robloxPanel');
+        const brainrotGrid = document.getElementById('brainrotGrid');
+        const nameGenerator = document.getElementById('nameGenerator');
+        const robloxVolumeSlider = document.getElementById('robloxVolume');
+        const robloxVolumeControl = document.getElementById('robloxVolumeControl');
+        const robloxTabs = document.querySelectorAll('.roblox-tab');
+        const generatedNameEl = document.getElementById('generatedName');
+        const generateNameBtn = document.getElementById('generateNameBtn');
+        const nameHistoryEl = document.getElementById('nameHistory');
+
+        // Italian Brainrot Characters with Web Audio synthesis
+        const brainrotCharacters = [
+            { id: 'tralalero', emoji: '🦈', name: 'Tralalero Tralala', sound: 'tralalero' },
+            { id: 'bombardino', emoji: '🐊', name: 'Bombardino Crocodilo', sound: 'bombardino' },
+            { id: 'tungtung', emoji: '🪵', name: 'Tung Tung Sahur', sound: 'tungtung' },
+            { id: 'cappuccino', emoji: '☕', name: 'Cappuccino Assassino', sound: 'cappuccino' },
+            { id: 'ballerina', emoji: '💃', name: 'Ballerina Cappuccina', sound: 'ballerina' },
+            { id: 'chimpanzini', emoji: '🐵', name: 'Chimpanzini Bananini', sound: 'chimpanzini' },
+            { id: 'bombombini', emoji: '🦆', name: 'Bombombini Gusini', sound: 'bombombini' },
+            { id: 'trippi', emoji: '🦐', name: 'Trippi Troppi', sound: 'trippi' },
+            { id: 'lirilì', emoji: '🌵', name: 'Lirilì Larilà', sound: 'lirili' },
+            { id: 'brr', emoji: '🐒', name: 'Brr Brr Patapim', sound: 'brr' },
+            { id: 'skibidi', emoji: '🚽', name: 'Skibidi Toilet', sound: 'skibidi' },
+            { id: 'spaghetti', emoji: '🍝', name: 'Spaghettini Linguini', sound: 'spaghetti' },
+            { id: 'pizza', emoji: '🍕', name: 'Pizzarino Pepperoni', sound: 'pizza' },
+            { id: 'gelato', emoji: '🍦', name: 'Gelatino Freddo', sound: 'gelato' },
+            { id: 'espresso', emoji: '☕', name: 'Espressino Nervoso', sound: 'espresso' },
+            { id: 'macaroni', emoji: '🧀', name: 'Macaroni Formaggio', sound: 'macaroni' }
+        ];
+
+        // Audio Context for synthesized sounds
+        let audioContext = null;
+
+        function getAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioContext;
+        }
+
+        // Synthesize brainrot sounds
+        function playBrainrotSound(character, btn) {
+            const ctx = getAudioContext();
+            const volume = robloxVolumeSlider.value / 100;
+
+            btn.classList.add('playing');
+
+            // Different sound patterns for each character
+            const soundPatterns = {
+                tralalero: () => playMelody(ctx, [440, 550, 440, 330, 440], 0.12, volume),
+                bombardino: () => playMelody(ctx, [150, 180, 150, 120, 180, 150], 0.15, volume),
+                tungtung: () => playPercussion(ctx, [200, 200, 200], 0.1, volume),
+                cappuccino: () => playMelody(ctx, [500, 600, 500, 400], 0.1, volume),
+                ballerina: () => playMelody(ctx, [600, 700, 800, 700, 600], 0.15, volume),
+                chimpanzini: () => playMelody(ctx, [800, 600, 800, 600, 800], 0.08, volume),
+                bombombini: () => playMelody(ctx, [200, 250, 200, 180, 200, 250], 0.12, volume),
+                trippi: () => playMelody(ctx, [700, 800, 900, 800, 700, 600], 0.1, volume),
+                lirili: () => playMelody(ctx, [500, 600, 700, 600, 500], 0.12, volume),
+                brr: () => playVibrato(ctx, 300, 0.5, volume),
+                skibidi: () => playMelody(ctx, [400, 500, 400, 300, 400, 500, 400], 0.08, volume),
+                spaghetti: () => playMelody(ctx, [350, 400, 450, 400, 350], 0.15, volume),
+                pizza: () => playMelody(ctx, [450, 500, 550, 500, 450], 0.12, volume),
+                gelato: () => playMelody(ctx, [600, 550, 500, 550, 600], 0.1, volume),
+                espresso: () => playMelody(ctx, [700, 750, 800, 750, 700, 650], 0.08, volume),
+                macaroni: () => playMelody(ctx, [300, 350, 400, 350, 300], 0.12, volume)
+            };
+
+            const pattern = soundPatterns[character.sound] || soundPatterns.tralalero;
+            pattern();
+
+            setTimeout(() => btn.classList.remove('playing'), 500);
+        }
+
+        function playMelody(ctx, frequencies, noteDuration, volume) {
+            frequencies.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.type = 'square';
+                osc.frequency.value = freq;
+
+                const startTime = ctx.currentTime + (i * noteDuration);
+                gain.gain.setValueAtTime(volume * 0.3, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, startTime + noteDuration * 0.9);
+
+                osc.start(startTime);
+                osc.stop(startTime + noteDuration);
+            });
+        }
+
+        function playPercussion(ctx, frequencies, duration, volume) {
+            frequencies.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+
+                const startTime = ctx.currentTime + (i * duration * 1.5);
+                gain.gain.setValueAtTime(volume * 0.5, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+                osc.start(startTime);
+                osc.stop(startTime + duration);
+            });
+        }
+
+        function playVibrato(ctx, baseFreq, duration, volume) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const lfo = ctx.createOscillator();
+            const lfoGain = ctx.createGain();
+
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.type = 'sawtooth';
+            osc.frequency.value = baseFreq;
+            lfo.frequency.value = 20;
+            lfoGain.gain.value = 50;
+
+            gain.gain.setValueAtTime(volume * 0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+            lfo.start();
+            osc.start();
+            osc.stop(ctx.currentTime + duration);
+            lfo.stop(ctx.currentTime + duration);
+        }
+
+        // Create brainrot buttons
+        function createBrainrotButtons() {
+            brainrotGrid.innerHTML = '';
+            brainrotCharacters.forEach(char => {
+                const btn = document.createElement('button');
+                btn.className = 'brainrot-btn';
+                btn.innerHTML = `
+                    <span class="char-emoji">${char.emoji}</span>
+                    <span class="char-name">${char.name.split(' ')[0]}</span>
+                `;
+                btn.title = char.name;
+                btn.addEventListener('click', () => playBrainrotSound(char, btn));
+                brainrotGrid.appendChild(btn);
+            });
+        }
+
+        // Name Generator
+        const namePrefixes = [
+            'Trala', 'Bomba', 'Tung', 'Cappuc', 'Balle', 'Chimpa',
+            'Bombo', 'Trippi', 'Liri', 'Brr', 'Skibi', 'Spaghe',
+            'Pizza', 'Gela', 'Espre', 'Maca', 'Pasta', 'Ravio',
+            'Torte', 'Lasa', 'Gnocc', 'Penne', 'Fusi', 'Riso'
+        ];
+
+        const nameSuffixes = [
+            'lero', 'dino', 'tung', 'cino', 'rina', 'nzini',
+            'mbini', 'troppi', 'lala', 'patapim', 'didi', 'ttini',
+            'rino', 'tino', 'ssino', 'roni', 'lini', 'etti',
+            'llini', 'gna', 'chi', 'rigatoni', 'lli', 'tto'
+        ];
+
+        const nameMiddles = [
+            ' Croco', ' Bana', ' Gusi', ' Fredo', ' Nervo',
+            ' Forma', ' Pepero', ' Lingua', ' Bologne', ' Carbo',
+            ' Alfre', ' Pomo', ' Basili', ' Oregano', ' Mozza'
+        ];
+
+        let nameHistory = [];
+
+        function generateBrainrotName() {
+            const prefix = namePrefixes[Math.floor(Math.random() * namePrefixes.length)];
+            const suffix = nameSuffixes[Math.floor(Math.random() * nameSuffixes.length)];
+            const useMiddle = Math.random() > 0.5;
+            const middle = useMiddle ? nameMiddles[Math.floor(Math.random() * nameMiddles.length)] : '';
+
+            const suffix2 = nameSuffixes[Math.floor(Math.random() * nameSuffixes.length)];
+
+            const name = prefix + suffix + middle + suffix2;
+
+            return name;
+        }
+
+        generateNameBtn.addEventListener('click', () => {
+            const name = generateBrainrotName();
+            generatedNameEl.textContent = name;
+            generatedNameEl.style.animation = 'none';
+            void generatedNameEl.offsetWidth;
+            generatedNameEl.style.animation = 'nameGlow 2s infinite alternate';
+
+            // Add to history
+            if (!nameHistory.includes(name)) {
+                nameHistory.unshift(name);
+                if (nameHistory.length > 8) nameHistory.pop();
+                renderNameHistory();
+            }
+
+            // Play sound
+            const ctx = getAudioContext();
+            playMelody(ctx, [400, 500, 600, 700, 800], 0.08, robloxVolumeSlider.value / 100);
+        });
+
+        function renderNameHistory() {
+            nameHistoryEl.innerHTML = nameHistory.map(name =>
+                `<span class="history-name" onclick="copyName('${name}')">${name}</span>`
+            ).join('');
+        }
+
+        function copyName(name) {
+            navigator.clipboard.writeText(name).then(() => {
+                generatedNameEl.textContent = name + ' ✓';
+                setTimeout(() => {
+                    generatedNameEl.textContent = name;
+                }, 1000);
+            });
+        }
+
+        // Make copyName global
+        window.copyName = copyName;
+
+        // Roblox tab switching
+        robloxTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                robloxTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const tabName = tab.dataset.robloxTab;
+                if (tabName === 'soundboard') {
+                    brainrotGrid.classList.add('active');
+                    nameGenerator.classList.remove('active');
+                    robloxVolumeControl.style.display = 'flex';
+                } else {
+                    brainrotGrid.classList.remove('active');
+                    nameGenerator.classList.add('active');
+                    robloxVolumeControl.style.display = 'none';
+                }
+            });
+        });
+
+        // Initialize brainrot buttons
+        createBrainrotButtons();
     </script>
 </body>
 </html>
