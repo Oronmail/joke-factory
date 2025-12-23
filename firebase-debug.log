@@ -1,0 +1,31 @@
+[debug] [2025-12-23T17:34:58.805Z] ----------------------------------------------------------------------
+[debug] [2025-12-23T17:34:58.807Z] Command:       /opt/homebrew/Cellar/node/24.4.1/bin/node /opt/homebrew/bin/firebase deploy --only hosting
+[debug] [2025-12-23T17:34:58.808Z] CLI Version:   15.1.0
+[debug] [2025-12-23T17:34:58.808Z] Platform:      darwin
+[debug] [2025-12-23T17:34:58.808Z] Node Version:  v24.4.1
+[debug] [2025-12-23T17:34:58.808Z] Time:          Tue Dec 23 2025 19:34:58 GMT+0200 (Israel Standard Time)
+[debug] [2025-12-23T17:34:58.808Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-12-23T17:34:59.566Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-12-23T17:34:59.566Z] > authorizing via signed-in user (oronmail@gmail.com)
+[debug] [2025-12-23T17:34:59.566Z] [iam] checking project bar-sjokefactory for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-12-23T17:34:59.567Z] Checked if tokens are valid: true, expires at: 1766513575667
+[debug] [2025-12-23T17:34:59.567Z] Checked if tokens are valid: true, expires at: 1766513575667
+[debug] [2025-12-23T17:34:59.567Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bar-sjokefactory:testIamPermissions [none]
+[debug] [2025-12-23T17:34:59.567Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bar-sjokefactory:testIamPermissions x-goog-quota-user=projects/bar-sjokefactory
+[debug] [2025-12-23T17:34:59.567Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bar-sjokefactory:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-12-23T17:35:00.538Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/bar-sjokefactory:testIamPermissions 200
+[debug] [2025-12-23T17:35:00.539Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bar-sjokefactory:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-12-23T17:35:00.539Z] Checked if tokens are valid: true, expires at: 1766513575667
+[debug] [2025-12-23T17:35:00.539Z] Checked if tokens are valid: true, expires at: 1766513575667
+[debug] [2025-12-23T17:35:00.539Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/bar-sjokefactory [none]
+[debug] [2025-12-23T17:35:00.903Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/bar-sjokefactory 200
+[debug] [2025-12-23T17:35:00.903Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/bar-sjokefactory {"projectId":"bar-sjokefactory","projectNumber":"1084220751714","displayName":"Bar'sJokeFactory","name":"projects/bar-sjokefactory","resources":{"hostingSite":"bar-sjokefactory"},"state":"ACTIVE","etag":"1_b8b4bf49-2229-4eac-9656-a0eb8cabf151"}
+[info] 
+[info] === Deploying to 'bar-sjokefactory'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-12-23T17:35:00.908Z] Checked if tokens are valid: true, expires at: 1766513575667
+[debug] [2025-12-23T17:35:00.908Z] Checked if tokens are valid: true, expires at: 1766513575667
+[debug] [2025-12-23T17:35:00.908Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bar-sjokefactory/versions [none]
+[debug] [2025-12-23T17:35:00.908Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bar-sjokefactory/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}

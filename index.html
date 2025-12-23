@@ -144,15 +144,10 @@
         }
 
         .category-btn[data-category="roblox"] {
-            background: linear-gradient(135deg, #00ff88 0%, #9945ff 100%);
-            color: #000;
-            text-shadow: 0 0 5px rgba(0,255,136,0.5);
-            animation: neonPulse 2s infinite;
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { box-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88; }
-            50% { box-shadow: 0 0 10px #9945ff, 0 0 20px #9945ff; }
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #6c5ce7 100%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .joke-display {
@@ -613,14 +608,14 @@
             line-height: 1.2;
         }
 
-        /* ROBLOX Zone Panel */
+        /* ROBLOX Zone Panel - Y2K Style */
         .roblox-panel {
             display: none;
             flex-direction: column;
             align-items: center;
             padding: 15px;
             height: 100%;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a1a0a 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             border-radius: 15px;
             position: relative;
             overflow: hidden;
@@ -629,14 +624,20 @@
         .roblox-panel::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             background:
-                radial-gradient(circle at 20% 80%, rgba(0,255,136,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(153,69,255,0.1) 0%, transparent 50%);
+                radial-gradient(circle at 30% 70%, rgba(255,107,157,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 70% 30%, rgba(108,92,231,0.15) 0%, transparent 40%);
+            animation: bgFloat 10s ease-in-out infinite;
             pointer-events: none;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(5%, 5%); }
         }
 
         .roblox-panel.active {
@@ -644,244 +645,238 @@
         }
 
         .roblox-panel h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.5em;
-            color: #00ff88;
-            text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-            animation: glitch 3s infinite;
-            position: relative;
-            z-index: 1;
+            margin: 0 0 8px 0;
+            font-size: 1.4em;
+            background: linear-gradient(90deg, #ff6b9d, #c44569, #6c5ce7, #a29bfe);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            font-weight: bold;
         }
 
-        @keyframes glitch {
-            0%, 90%, 100% { transform: translateX(0); }
-            92% { transform: translateX(-2px); }
-            94% { transform: translateX(2px); }
-            96% { transform: translateX(-1px); }
-            98% { transform: translateX(1px); }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        .roblox-subtitle {
-            color: #9945ff;
-            font-size: 0.8em;
+        /* Aura Meter */
+        .aura-section {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
             margin-bottom: 15px;
-            text-shadow: 0 0 5px #9945ff;
-            position: relative;
-            z-index: 1;
         }
 
-        .roblox-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .roblox-tab {
-            padding: 8px 16px;
-            background: rgba(0,255,136,0.1);
-            border: 2px solid #00ff88;
-            border-radius: 20px;
-            color: #00ff88;
-            font-family: inherit;
-            cursor: pointer;
+        .aura-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,107,157,0.8);
+            margin-bottom: 10px;
             transition: all 0.3s ease;
         }
 
-        .roblox-tab:hover {
-            background: rgba(0,255,136,0.2);
-            box-shadow: 0 0 15px rgba(0,255,136,0.5);
-        }
-
-        .roblox-tab.active {
-            background: #00ff88;
-            color: #000;
-            box-shadow: 0 0 20px #00ff88;
-        }
-
-        .roblox-content {
-            flex: 1;
-            width: 100%;
-            overflow-y: auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Brainrot Soundboard */
-        .brainrot-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            width: 100%;
-            max-width: 550px;
-            margin: 0 auto;
-            padding: 5px;
-        }
-
-        .brainrot-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 6px;
-            border: 2px solid #00ff88;
-            border-radius: 12px;
-            background: rgba(0,0,0,0.5);
+        .aura-display.positive {
             color: #00ff88;
-            font-family: inherit;
-            font-size: 0.7em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
+            text-shadow: 0 0 30px rgba(0,255,136,0.8);
+            animation: auraPop 0.5s ease;
         }
 
-        .brainrot-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0,255,136,0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
+        .aura-display.negative {
+            color: #ff4757;
+            text-shadow: 0 0 30px rgba(255,71,87,0.8);
+            animation: auraShake 0.5s ease;
         }
 
-        .brainrot-btn:hover::before {
-            left: 100%;
-        }
-
-        .brainrot-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(0,255,136,0.5), 0 0 40px rgba(153,69,255,0.3);
-            border-color: #9945ff;
-            color: #fff;
-        }
-
-        .brainrot-btn:active {
-            transform: scale(0.95);
-        }
-
-        .brainrot-btn.playing {
-            animation: brainrotPulse 0.4s ease;
-            background: linear-gradient(135deg, #00ff88 0%, #9945ff 100%);
-            color: #000;
-        }
-
-        @keyframes brainrotPulse {
+        @keyframes auraPop {
             0% { transform: scale(1); }
-            50% { transform: scale(1.15) rotate(5deg); }
+            50% { transform: scale(1.3); }
             100% { transform: scale(1); }
         }
 
-        .brainrot-btn .char-emoji {
-            font-size: 2em;
-            margin-bottom: 4px;
+        @keyframes auraShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
-        .brainrot-btn .char-name {
-            text-align: center;
-            line-height: 1.1;
-            font-weight: bold;
+        .aura-label {
+            color: #a29bfe;
+            font-size: 0.9em;
+            margin-bottom: 10px;
         }
 
-        /* Name Generator */
-        .name-generator {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .name-generator.active {
-            display: flex;
-        }
-
-        .generated-name {
-            font-size: 2em;
-            color: #00ff88;
-            text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 30px #9945ff;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            padding: 20px;
-            background: rgba(0,0,0,0.5);
-            border: 2px solid #00ff88;
-            border-radius: 15px;
-            min-width: 280px;
-            animation: nameGlow 2s infinite alternate;
-        }
-
-        @keyframes nameGlow {
-            from { text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
-            to { text-shadow: 0 0 20px #9945ff, 0 0 40px #9945ff, 0 0 60px #9945ff; }
-        }
-
-        .generate-btn {
-            padding: 15px 40px;
-            font-size: 1.2em;
-            background: linear-gradient(135deg, #00ff88 0%, #9945ff 100%);
-            color: #000;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0,255,136,0.5);
-        }
-
-        .generate-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0,255,136,0.8), 0 0 50px rgba(153,69,255,0.5);
-        }
-
-        .name-history {
+        .aura-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             justify-content: center;
-            max-width: 400px;
         }
 
-        .history-name {
-            padding: 5px 12px;
-            background: rgba(153,69,255,0.2);
-            border: 1px solid #9945ff;
-            border-radius: 15px;
-            color: #9945ff;
+        .aura-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 20px;
+            font-family: inherit;
             font-size: 0.85em;
             cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .aura-btn.gain {
+            background: linear-gradient(135deg, #00ff88 0%, #00d68f 100%);
+            color: #000;
+        }
+
+        .aura-btn.lose {
+            background: linear-gradient(135deg, #ff4757 0%, #c0392b 100%);
+            color: #fff;
+        }
+
+        .aura-btn.steal {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: #fff;
+        }
+
+        .aura-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .aura-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Roast Generator */
+        .roast-section {
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(255,107,157,0.3);
+        }
+
+        .roast-title {
+            color: #ff6b9d;
+            font-size: 1em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .roast-display {
+            font-size: 1.2em;
+            color: #fff;
+            line-height: 1.4;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .roast-display.new {
+            animation: roastAppear 0.4s ease;
+        }
+
+        @keyframes roastAppear {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .roast-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-family: inherit;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
             transition: all 0.3s ease;
         }
 
-        .history-name:hover {
-            background: rgba(153,69,255,0.4);
+        .roast-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(255,107,157,0.5);
         }
 
-        /* Roblox volume control */
-        .roblox-volume {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* Brainrot Level Quiz */
+        .quiz-section {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(108,92,231,0.2);
+            border-radius: 15px;
+            border: 2px solid rgba(108,92,231,0.4);
+        }
+
+        .quiz-title {
+            color: #a29bfe;
+            font-size: 1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .quiz-result {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
             margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            text-shadow: 0 0 15px rgba(162,155,254,0.8);
         }
 
-        .roblox-volume span {
-            color: #00ff88;
+        .quiz-description {
+            color: #ddd;
+            font-size: 0.9em;
+            margin-bottom: 15px;
         }
 
-        .roblox-volume input[type="range"] {
-            width: 120px;
+        .quiz-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-family: inherit;
+            font-size: 1em;
             cursor: pointer;
-            accent-color: #00ff88;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(108,92,231,0.5);
+        }
+
+        .quiz-progress {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .quiz-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .quiz-dot.active {
+            background: #a29bfe;
+        }
+
+        .quiz-dot.done {
+            background: #00ff88;
         }
 
         /* Mobile Menu - Hidden by default */
@@ -1178,60 +1173,48 @@
             /* Roblox panel mobile */
             .roblox-panel {
                 padding: 10px;
+                overflow-y: auto;
             }
 
             .roblox-panel h3 {
-                font-size: 1.2em;
-                margin-bottom: 3px;
+                font-size: 1.1em;
+                margin-bottom: 5px;
             }
 
-            .roblox-subtitle {
-                font-size: 0.7em;
-                margin-bottom: 10px;
+            .aura-display {
+                font-size: 2em;
             }
 
-            .roblox-tabs {
-                gap: 6px;
-                margin-bottom: 10px;
+            .aura-buttons {
+                gap: 5px;
             }
 
-            .roblox-tab {
-                padding: 6px 12px;
-                font-size: 0.8em;
-            }
-
-            .brainrot-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 6px;
-            }
-
-            .brainrot-btn {
-                padding: 8px 4px;
-                font-size: 0.6em;
-            }
-
-            .brainrot-btn .char-emoji {
-                font-size: 1.5em;
-            }
-
-            .generated-name {
-                font-size: 1.3em;
-                padding: 15px;
-                min-width: 200px;
-            }
-
-            .generate-btn {
-                padding: 12px 30px;
-                font-size: 1em;
-            }
-
-            .name-history {
-                max-width: 300px;
-            }
-
-            .history-name {
+            .aura-btn {
+                padding: 8px 12px;
                 font-size: 0.75em;
-                padding: 4px 10px;
+            }
+
+            .roast-section {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            .roast-display {
+                font-size: 1em;
+                min-height: 40px;
+            }
+
+            .roast-btn, .quiz-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .quiz-section {
+                padding: 10px;
+            }
+
+            .quiz-result {
+                font-size: 1.4em;
             }
         }
 
@@ -1366,32 +1349,35 @@
 
             <!-- ROBLOX Zone Panel -->
             <div class="roblox-panel" id="robloxPanel">
-                <h3>🎮 ROBLOX ZONE 🎮</h3>
-                <div class="roblox-subtitle">Italian Brainrot Soundboard</div>
+                <h3>🎮 BRAINROT ZONE 🧠</h3>
 
-                <div class="roblox-tabs">
-                    <button class="roblox-tab active" data-roblox-tab="soundboard">🔊 Soundboard</button>
-                    <button class="roblox-tab" data-roblox-tab="generator">✨ מחולל שמות</button>
+                <!-- Aura Meter -->
+                <div class="aura-section">
+                    <div class="aura-display" id="auraDisplay">0</div>
+                    <div class="aura-label">✨ Your Aura ✨</div>
+                    <div class="aura-buttons">
+                        <button class="aura-btn gain" data-aura="1000">+1000 Rizz</button>
+                        <button class="aura-btn gain" data-aura="500">+500 Sigma</button>
+                        <button class="aura-btn lose" data-aura="-500">-500 Ohio</button>
+                        <button class="aura-btn lose" data-aura="-1000">-1000 L</button>
+                        <button class="aura-btn steal" id="fanum-tax">🍟 Fanum Tax</button>
+                    </div>
                 </div>
 
-                <div class="roblox-volume" id="robloxVolumeControl">
-                    <span>🔈</span>
-                    <input type="range" id="robloxVolume" min="0" max="100" value="80">
-                    <span>🔊</span>
+                <!-- Brainrot Roast Generator -->
+                <div class="roast-section">
+                    <div class="roast-title">🔥 Brainrot Roast Generator 🔥</div>
+                    <div class="roast-display" id="roastDisplay">לחץ לקבל roast...</div>
+                    <button class="roast-btn" id="roastBtn">💀 Roast Me</button>
                 </div>
 
-                <div class="roblox-content">
-                    <!-- Soundboard -->
-                    <div class="brainrot-grid active" id="brainrotGrid">
-                        <!-- כפתורי הדמויות יתווספו ב-JavaScript -->
-                    </div>
-
-                    <!-- Name Generator -->
-                    <div class="name-generator" id="nameGenerator">
-                        <div class="generated-name" id="generatedName">???</div>
-                        <button class="generate-btn" id="generateNameBtn">🎲 צור שם חדש!</button>
-                        <div class="name-history" id="nameHistory"></div>
-                    </div>
+                <!-- Brainrot Level Quiz -->
+                <div class="quiz-section">
+                    <div class="quiz-title">🧠 ?What's Your Brainrot Level</div>
+                    <div class="quiz-result" id="quizResult">???</div>
+                    <div class="quiz-description" id="quizDesc">לחץ לגלות כמה brainrot יש לך</div>
+                    <button class="quiz-btn" id="quizBtn">🎲 Check My Level</button>
+                    <div class="quiz-progress" id="quizProgress"></div>
                 </div>
             </div>
 
@@ -2085,255 +2071,165 @@
         // יצירת כפתורי הפלוצים בטעינה
         createFartButtons();
 
-        // ========== ROBLOX Zone - Italian Brainrot ==========
-        const robloxPanel = document.getElementById('robloxPanel');
-        const brainrotGrid = document.getElementById('brainrotGrid');
-        const nameGenerator = document.getElementById('nameGenerator');
-        const robloxVolumeSlider = document.getElementById('robloxVolume');
-        const robloxVolumeControl = document.getElementById('robloxVolumeControl');
-        const robloxTabs = document.querySelectorAll('.roblox-tab');
-        const generatedNameEl = document.getElementById('generatedName');
-        const generateNameBtn = document.getElementById('generateNameBtn');
-        const nameHistoryEl = document.getElementById('nameHistory');
+        // ========== BRAINROT ZONE - Gen Alpha Style ==========
 
-        // Italian Brainrot Characters with Web Audio synthesis
-        const brainrotCharacters = [
-            { id: 'tralalero', emoji: '🦈', name: 'Tralalero Tralala', sound: 'tralalero' },
-            { id: 'bombardino', emoji: '🐊', name: 'Bombardino Crocodilo', sound: 'bombardino' },
-            { id: 'tungtung', emoji: '🪵', name: 'Tung Tung Sahur', sound: 'tungtung' },
-            { id: 'cappuccino', emoji: '☕', name: 'Cappuccino Assassino', sound: 'cappuccino' },
-            { id: 'ballerina', emoji: '💃', name: 'Ballerina Cappuccina', sound: 'ballerina' },
-            { id: 'chimpanzini', emoji: '🐵', name: 'Chimpanzini Bananini', sound: 'chimpanzini' },
-            { id: 'bombombini', emoji: '🦆', name: 'Bombombini Gusini', sound: 'bombombini' },
-            { id: 'trippi', emoji: '🦐', name: 'Trippi Troppi', sound: 'trippi' },
-            { id: 'lirilì', emoji: '🌵', name: 'Lirilì Larilà', sound: 'lirili' },
-            { id: 'brr', emoji: '🐒', name: 'Brr Brr Patapim', sound: 'brr' },
-            { id: 'skibidi', emoji: '🚽', name: 'Skibidi Toilet', sound: 'skibidi' },
-            { id: 'spaghetti', emoji: '🍝', name: 'Spaghettini Linguini', sound: 'spaghetti' },
-            { id: 'pizza', emoji: '🍕', name: 'Pizzarino Pepperoni', sound: 'pizza' },
-            { id: 'gelato', emoji: '🍦', name: 'Gelatino Freddo', sound: 'gelato' },
-            { id: 'espresso', emoji: '☕', name: 'Espressino Nervoso', sound: 'espresso' },
-            { id: 'macaroni', emoji: '🧀', name: 'Macaroni Formaggio', sound: 'macaroni' }
-        ];
+        // Aura System
+        let currentAura = 0;
+        const auraDisplay = document.getElementById('auraDisplay');
+        const auraButtons = document.querySelectorAll('.aura-btn[data-aura]');
+        const fanumTaxBtn = document.getElementById('fanum-tax');
 
-        // Audio Context for synthesized sounds
-        let audioContext = null;
+        function updateAura(change) {
+            currentAura += change;
+            auraDisplay.textContent = currentAura.toLocaleString();
 
-        function getAudioContext() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            return audioContext;
-        }
+            // Remove old classes
+            auraDisplay.classList.remove('positive', 'negative');
 
-        // Synthesize brainrot sounds
-        function playBrainrotSound(character, btn) {
-            const ctx = getAudioContext();
-            const volume = robloxVolumeSlider.value / 100;
-
-            btn.classList.add('playing');
-
-            // Different sound patterns for each character
-            const soundPatterns = {
-                tralalero: () => playMelody(ctx, [440, 550, 440, 330, 440], 0.12, volume),
-                bombardino: () => playMelody(ctx, [150, 180, 150, 120, 180, 150], 0.15, volume),
-                tungtung: () => playPercussion(ctx, [200, 200, 200], 0.1, volume),
-                cappuccino: () => playMelody(ctx, [500, 600, 500, 400], 0.1, volume),
-                ballerina: () => playMelody(ctx, [600, 700, 800, 700, 600], 0.15, volume),
-                chimpanzini: () => playMelody(ctx, [800, 600, 800, 600, 800], 0.08, volume),
-                bombombini: () => playMelody(ctx, [200, 250, 200, 180, 200, 250], 0.12, volume),
-                trippi: () => playMelody(ctx, [700, 800, 900, 800, 700, 600], 0.1, volume),
-                lirili: () => playMelody(ctx, [500, 600, 700, 600, 500], 0.12, volume),
-                brr: () => playVibrato(ctx, 300, 0.5, volume),
-                skibidi: () => playMelody(ctx, [400, 500, 400, 300, 400, 500, 400], 0.08, volume),
-                spaghetti: () => playMelody(ctx, [350, 400, 450, 400, 350], 0.15, volume),
-                pizza: () => playMelody(ctx, [450, 500, 550, 500, 450], 0.12, volume),
-                gelato: () => playMelody(ctx, [600, 550, 500, 550, 600], 0.1, volume),
-                espresso: () => playMelody(ctx, [700, 750, 800, 750, 700, 650], 0.08, volume),
-                macaroni: () => playMelody(ctx, [300, 350, 400, 350, 300], 0.12, volume)
-            };
-
-            const pattern = soundPatterns[character.sound] || soundPatterns.tralalero;
-            pattern();
-
-            setTimeout(() => btn.classList.remove('playing'), 500);
-        }
-
-        function playMelody(ctx, frequencies, noteDuration, volume) {
-            frequencies.forEach((freq, i) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-
-                osc.type = 'square';
-                osc.frequency.value = freq;
-
-                const startTime = ctx.currentTime + (i * noteDuration);
-                gain.gain.setValueAtTime(volume * 0.3, startTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, startTime + noteDuration * 0.9);
-
-                osc.start(startTime);
-                osc.stop(startTime + noteDuration);
-            });
-        }
-
-        function playPercussion(ctx, frequencies, duration, volume) {
-            frequencies.forEach((freq, i) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-
-                osc.type = 'triangle';
-                osc.frequency.value = freq;
-
-                const startTime = ctx.currentTime + (i * duration * 1.5);
-                gain.gain.setValueAtTime(volume * 0.5, startTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-
-                osc.start(startTime);
-                osc.stop(startTime + duration);
-            });
-        }
-
-        function playVibrato(ctx, baseFreq, duration, volume) {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            const lfo = ctx.createOscillator();
-            const lfoGain = ctx.createGain();
-
-            lfo.connect(lfoGain);
-            lfoGain.connect(osc.frequency);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-
-            osc.type = 'sawtooth';
-            osc.frequency.value = baseFreq;
-            lfo.frequency.value = 20;
-            lfoGain.gain.value = 50;
-
-            gain.gain.setValueAtTime(volume * 0.3, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
-
-            lfo.start();
-            osc.start();
-            osc.stop(ctx.currentTime + duration);
-            lfo.stop(ctx.currentTime + duration);
-        }
-
-        // Create brainrot buttons
-        function createBrainrotButtons() {
-            brainrotGrid.innerHTML = '';
-            brainrotCharacters.forEach(char => {
-                const btn = document.createElement('button');
-                btn.className = 'brainrot-btn';
-                btn.innerHTML = `
-                    <span class="char-emoji">${char.emoji}</span>
-                    <span class="char-name">${char.name.split(' ')[0]}</span>
-                `;
-                btn.title = char.name;
-                btn.addEventListener('click', () => playBrainrotSound(char, btn));
-                brainrotGrid.appendChild(btn);
-            });
-        }
-
-        // Name Generator
-        const namePrefixes = [
-            'Trala', 'Bomba', 'Tung', 'Cappuc', 'Balle', 'Chimpa',
-            'Bombo', 'Trippi', 'Liri', 'Brr', 'Skibi', 'Spaghe',
-            'Pizza', 'Gela', 'Espre', 'Maca', 'Pasta', 'Ravio',
-            'Torte', 'Lasa', 'Gnocc', 'Penne', 'Fusi', 'Riso'
-        ];
-
-        const nameSuffixes = [
-            'lero', 'dino', 'tung', 'cino', 'rina', 'nzini',
-            'mbini', 'troppi', 'lala', 'patapim', 'didi', 'ttini',
-            'rino', 'tino', 'ssino', 'roni', 'lini', 'etti',
-            'llini', 'gna', 'chi', 'rigatoni', 'lli', 'tto'
-        ];
-
-        const nameMiddles = [
-            ' Croco', ' Bana', ' Gusi', ' Fredo', ' Nervo',
-            ' Forma', ' Pepero', ' Lingua', ' Bologne', ' Carbo',
-            ' Alfre', ' Pomo', ' Basili', ' Oregano', ' Mozza'
-        ];
-
-        let nameHistory = [];
-
-        function generateBrainrotName() {
-            const prefix = namePrefixes[Math.floor(Math.random() * namePrefixes.length)];
-            const suffix = nameSuffixes[Math.floor(Math.random() * nameSuffixes.length)];
-            const useMiddle = Math.random() > 0.5;
-            const middle = useMiddle ? nameMiddles[Math.floor(Math.random() * nameMiddles.length)] : '';
-
-            const suffix2 = nameSuffixes[Math.floor(Math.random() * nameSuffixes.length)];
-
-            const name = prefix + suffix + middle + suffix2;
-
-            return name;
-        }
-
-        generateNameBtn.addEventListener('click', () => {
-            const name = generateBrainrotName();
-            generatedNameEl.textContent = name;
-            generatedNameEl.style.animation = 'none';
-            void generatedNameEl.offsetWidth;
-            generatedNameEl.style.animation = 'nameGlow 2s infinite alternate';
-
-            // Add to history
-            if (!nameHistory.includes(name)) {
-                nameHistory.unshift(name);
-                if (nameHistory.length > 8) nameHistory.pop();
-                renderNameHistory();
+            // Add animation class
+            if (change > 0) {
+                auraDisplay.classList.add('positive');
+            } else if (change < 0) {
+                auraDisplay.classList.add('negative');
             }
 
-            // Play sound
-            const ctx = getAudioContext();
-            playMelody(ctx, [400, 500, 600, 700, 800], 0.08, robloxVolumeSlider.value / 100);
+            // Remove class after animation
+            setTimeout(() => {
+                auraDisplay.classList.remove('positive', 'negative');
+            }, 500);
+
+            // Save to localStorage
+            localStorage.setItem('brainrotAura', currentAura);
+        }
+
+        // Load saved aura
+        const savedAura = localStorage.getItem('brainrotAura');
+        if (savedAura) {
+            currentAura = parseInt(savedAura);
+            auraDisplay.textContent = currentAura.toLocaleString();
+        }
+
+        // Aura button events
+        auraButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const change = parseInt(btn.dataset.aura);
+                updateAura(change);
+            });
         });
 
-        function renderNameHistory() {
-            nameHistoryEl.innerHTML = nameHistory.map(name =>
-                `<span class="history-name" onclick="copyName('${name}')">${name}</span>`
-            ).join('');
-        }
+        // Fanum Tax - random steal
+        fanumTaxBtn.addEventListener('click', () => {
+            const steal = Math.floor(Math.random() * 500) + 100;
+            updateAura(steal);
+            fanumTaxBtn.textContent = `🍟 +${steal}!`;
+            setTimeout(() => {
+                fanumTaxBtn.textContent = '🍟 Fanum Tax';
+            }, 1000);
+        });
 
-        function copyName(name) {
-            navigator.clipboard.writeText(name).then(() => {
-                generatedNameEl.textContent = name + ' ✓';
+        // Brainrot Roast Generator
+        const roasts = [
+            "You're so Ohio it physically hurts 💀",
+            "Your rizz is in the negative sigma zone",
+            "Bro really said 'skibidi' unironically 🚽",
+            "You got zero aura and it shows",
+            "Even Tung Tung Sahur has better vibes than you",
+            "Your Roblox avatar looks like it was made in 2012",
+            "You're the human equivalent of -1000 aura",
+            "Bro's brainrot level is off the charts... and not in a good way",
+            "You probably still play Adopt Me unironically",
+            "Your sigma grindset is actually just being alone",
+            "Even Bombardino Crocodilo wouldn't claim you",
+            "You're what happens when Ohio and L combine",
+            "Bro's entire existence is negative rizz",
+            "You got fanum taxed by life itself",
+            "Your aura is so low it's basically underground",
+            "Skibidi toilet has more personality than you 🚽",
+            "You're the reason parents don't understand brainrot",
+            "Bro peaked in the tutorial",
+            "Your whole vibe is just... mid",
+            "Even NPC's have better dialogue than you"
+        ];
+
+        const roastDisplay = document.getElementById('roastDisplay');
+        const roastBtn = document.getElementById('roastBtn');
+
+        roastBtn.addEventListener('click', () => {
+            const roast = roasts[Math.floor(Math.random() * roasts.length)];
+            roastDisplay.textContent = roast;
+            roastDisplay.classList.remove('new');
+            void roastDisplay.offsetWidth;
+            roastDisplay.classList.add('new');
+
+            // Lose aura when roasted
+            updateAura(-100);
+        });
+
+        // Brainrot Level Quiz
+        const brainrotLevels = [
+            { level: "0% - Pure Soul", desc: "איכשהו עדיין לא נפלת לתהום. Respect.", emoji: "😇" },
+            { level: "15% - Casual Viewer", desc: "צפית בכמה סרטונים. עדיין יש תקווה.", emoji: "🙂" },
+            { level: "35% - Getting There", desc: "מתחיל להבין את הממז. Ohio energy.", emoji: "😏" },
+            { level: "50% - Mid Brainrot", desc: "יודע מה זה Skibidi. מכיר את Tralalero.", emoji: "😵" },
+            { level: "69% - Nice Brainrot", desc: "Nice. הסלנג כבר חלק ממך.", emoji: "😎" },
+            { level: "80% - Sigma Level", desc: "רמת סיגמה. הbrainrot חזק בך.", emoji: "🗿" },
+            { level: "95% - Peak Ohio", desc: "Peak brainrot. אין דרך חזרה.", emoji: "💀" },
+            { level: "100% - Transcended", desc: "עברת מעבר לbrainrot. אתה עכשיו ה-brainrot.", emoji: "🧠" }
+        ];
+
+        const quizResult = document.getElementById('quizResult');
+        const quizDesc = document.getElementById('quizDesc');
+        const quizBtn = document.getElementById('quizBtn');
+        const quizProgress = document.getElementById('quizProgress');
+
+        let quizClicks = 0;
+        let quizState = 'idle';
+
+        quizBtn.addEventListener('click', () => {
+            if (quizState === 'idle') {
+                // Start quiz animation
+                quizState = 'running';
+                quizClicks = 0;
+                quizBtn.textContent = '⏳ Calculating...';
+                quizResult.textContent = '🔄';
+
+                // Show progress dots
+                quizProgress.innerHTML = Array(8).fill('<span class="quiz-dot"></span>').join('');
+                const dots = quizProgress.querySelectorAll('.quiz-dot');
+
+                // Animate through levels
+                let currentLevel = 0;
+                const interval = setInterval(() => {
+                    if (currentLevel < 8) {
+                        dots[currentLevel].classList.add('active');
+                        quizResult.textContent = brainrotLevels[currentLevel].emoji;
+                        currentLevel++;
+                    }
+                }, 200);
+
+                // Final result
                 setTimeout(() => {
-                    generatedNameEl.textContent = name;
-                }, 1000);
-            });
-        }
+                    clearInterval(interval);
+                    const finalLevel = Math.floor(Math.random() * brainrotLevels.length);
+                    const result = brainrotLevels[finalLevel];
 
-        // Make copyName global
-        window.copyName = copyName;
+                    quizResult.textContent = `${result.emoji} ${result.level}`;
+                    quizDesc.textContent = result.desc;
+                    quizBtn.textContent = '🎲 Try Again';
+                    quizState = 'idle';
 
-        // Roblox tab switching
-        robloxTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                robloxTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
+                    // Add aura based on result
+                    const auraGain = (finalLevel + 1) * 100;
+                    updateAura(auraGain);
 
-                const tabName = tab.dataset.robloxTab;
-                if (tabName === 'soundboard') {
-                    brainrotGrid.classList.add('active');
-                    nameGenerator.classList.remove('active');
-                    robloxVolumeControl.style.display = 'flex';
-                } else {
-                    brainrotGrid.classList.remove('active');
-                    nameGenerator.classList.add('active');
-                    robloxVolumeControl.style.display = 'none';
-                }
-            });
+                    // Mark all dots as done
+                    dots.forEach(dot => {
+                        dot.classList.remove('active');
+                        dot.classList.add('done');
+                    });
+                }, 2000);
+            }
         });
-
-        // Initialize brainrot buttons
-        createBrainrotButtons();
     </script>
 </body>
 </html>
