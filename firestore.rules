@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Jokes ratings - allow read and write for everyone
+    match /jokes/{jokeId} {
+      allow read, write: if true;
+    }
+
+    // Users collection - שם משתמש וסיסמה
+    match /users/{userId} {
+      // כולם יכולים לקרוא (לצורך התחברות ופאנל ניהול)
+      allow read: if true;
+      // כולם יכולים ליצור משתמש חדש
+      allow create: if true;
+      // כולם יכולים לעדכן (לניהול)
+      allow update: if true;
+    }
+
+    // Chat messages
+    match /chat_messages/{messageId} {
+      // כולם יכולים לקרוא
+      allow read: if true;
+      // כולם יכולים לכתוב (הבדיקה נעשית בצד הלקוח)
+      allow create: if true;
+      // כולם יכולים לעדכן (להצבעות בסקרים)
+      allow update: if true;
+      // כולם יכולים למחוק (הבדיקה נעשית בצד הלקוח)
+      allow delete: if true;
+    }
+  }
+}

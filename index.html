@@ -143,13 +143,6 @@
             color: white;
         }
 
-        .category-btn[data-category="roblox"] {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #6c5ce7 100%);
-            color: white;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
         .category-btn[data-category="chat"] {
             background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
             color: white;
@@ -614,278 +607,6 @@
             line-height: 1.2;
         }
 
-        /* ROBLOX Zone Panel - Y2K Style */
-        .roblox-panel {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            justify-content: space-between;
-        }
-
-        .roblox-panel::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background:
-                radial-gradient(circle at 30% 70%, rgba(255,107,157,0.15) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(108,92,231,0.15) 0%, transparent 40%);
-            animation: bgFloat 10s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes bgFloat {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(5%, 5%); }
-        }
-
-        .roblox-panel.active {
-            display: flex;
-        }
-
-        .roblox-panel h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.2em;
-            background: linear-gradient(90deg, #ff6b9d, #c44569, #6c5ce7, #a29bfe);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 3s ease infinite;
-            font-weight: bold;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Aura Meter */
-        .aura-section {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .aura-display {
-            font-size: 2em;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(255,107,157,0.8);
-            margin-bottom: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .aura-display.positive {
-            color: #00ff88;
-            text-shadow: 0 0 30px rgba(0,255,136,0.8);
-            animation: auraPop 0.5s ease;
-        }
-
-        .aura-display.negative {
-            color: #ff4757;
-            text-shadow: 0 0 30px rgba(255,71,87,0.8);
-            animation: auraShake 0.5s ease;
-        }
-
-        @keyframes auraPop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes auraShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .aura-label {
-            color: #a29bfe;
-            font-size: 0.8em;
-            margin-bottom: 5px;
-        }
-
-        .aura-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            justify-content: center;
-        }
-
-        .aura-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 15px;
-            font-family: inherit;
-            font-size: 0.75em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: bold;
-        }
-
-        .aura-btn.gain {
-            background: linear-gradient(135deg, #00ff88 0%, #00d68f 100%);
-            color: #000;
-        }
-
-        .aura-btn.lose {
-            background: linear-gradient(135deg, #ff4757 0%, #c0392b 100%);
-            color: #fff;
-        }
-
-        .aura-btn.steal {
-            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-            color: #fff;
-        }
-
-        .aura-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-        }
-
-        .aura-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Roast Generator */
-        .roast-section {
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            margin-bottom: 8px;
-            padding: 10px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            border: 2px solid rgba(255,107,157,0.3);
-        }
-
-        .roast-title {
-            color: #ff6b9d;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .roast-display {
-            font-size: 1em;
-            color: #fff;
-            line-height: 1.3;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px;
-        }
-
-        .roast-display.new {
-            animation: roastAppear 0.4s ease;
-        }
-
-        @keyframes roastAppear {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .roast-btn {
-            padding: 8px 20px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            font-family: inherit;
-            font-size: 0.85em;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .roast-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 25px rgba(255,107,157,0.5);
-        }
-
-        /* Brainrot Level Quiz */
-        .quiz-section {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            padding: 10px;
-            background: rgba(108,92,231,0.2);
-            border-radius: 12px;
-            border: 2px solid rgba(108,92,231,0.4);
-        }
-
-        .quiz-title {
-            color: #a29bfe;
-            font-size: 0.9em;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .quiz-result {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(162,155,254,0.8);
-        }
-
-        .quiz-description {
-            color: #ddd;
-            font-size: 0.8em;
-            margin-bottom: 8px;
-        }
-
-        .quiz-btn {
-            padding: 8px 20px;
-            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            font-family: inherit;
-            font-size: 0.85em;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .quiz-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 25px rgba(108,92,231,0.5);
-        }
-
-        .quiz-progress {
-            display: flex;
-            gap: 5px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .quiz-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-        }
-
-        .quiz-dot.active {
-            background: #a29bfe;
-        }
-
-        .quiz-dot.done {
-            background: #00ff88;
-        }
-
         /* Chat Panel */
         .chat-panel {
             display: none;
@@ -901,6 +622,18 @@
             display: flex;
         }
 
+        .chat-panel.active ~ .bottom-row {
+            display: none !important;
+        }
+
+        .main-content:has(.chat-panel.active) .bottom-row {
+            display: none !important;
+        }
+
+        .main-content:has(.chat-panel.active) .joke-display {
+            display: none !important;
+        }
+
         .chat-panel h3 {
             margin: 0 0 10px 0;
             text-align: center;
@@ -911,6 +644,7 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -918,7 +652,7 @@
             background: rgba(255,255,255,0.7);
             border-radius: 10px;
             margin-bottom: 10px;
-            min-height: 200px;
+            min-height: 0;
         }
 
         .chat-message {
@@ -943,16 +677,46 @@
             border-bottom-right-radius: 5px;
         }
 
+        .chat-message .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
         .chat-message .username {
             font-size: 0.7em;
             opacity: 0.8;
-            margin-bottom: 3px;
             font-weight: bold;
+        }
+
+        .delete-msg-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.7em;
+            opacity: 0.5;
+            padding: 0;
+            transition: opacity 0.2s;
+        }
+
+        .delete-msg-btn:hover {
+            opacity: 1;
         }
 
         .chat-message .text {
             font-size: 0.9em;
             line-height: 1.3;
+            word-break: break-word;
+        }
+
+        .chat-message .text a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        .chat-message.mine .text a {
+            color: #004499;
         }
 
         .chat-message .time {
@@ -1139,6 +903,332 @@
         .poll-modal-buttons .cancel-btn {
             background: #e0e0e0;
             color: #333;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 350px;
+            direction: rtl;
+            text-align: center;
+        }
+
+        .auth-modal h3 {
+            margin: 0 0 20px 0;
+            color: #667eea;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .auth-form input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .auth-submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .auth-submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .auth-error {
+            color: #e74c3c;
+            font-size: 0.85em;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .auth-close-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* User Status Bar */
+        .user-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.85em;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-role {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .role-user {
+            background: #2196f3;
+            color: white;
+        }
+
+        .role-admin {
+            background: #ff9800;
+            color: white;
+        }
+
+        .role-superadmin {
+            background: #e91e63;
+            color: white;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .user-actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8em;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .logout-btn {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .admin-btn {
+            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+            color: white;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .admin-panel.active {
+            display: flex;
+        }
+
+        .admin-panel-content {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            direction: rtl;
+        }
+
+        .admin-panel h3 {
+            margin: 0 0 15px 0;
+            color: #ff9800;
+            text-align: center;
+        }
+
+        .admin-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .admin-section h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .user-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .user-item.blocked {
+            background: #ffebee;
+            opacity: 0.7;
+        }
+
+        .user-item-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-item-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .user-item-actions button {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.75em;
+        }
+
+        .block-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .unblock-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .role-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .admin-close-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Chat permission messages */
+        .chat-login-prompt {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .chat-login-prompt button {
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .chat-blocked-msg {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-radius: 10px;
+            color: #c62828;
         }
 
         /* Mobile Menu - Hidden by default */
@@ -1432,52 +1522,6 @@
                 margin-bottom: 2px;
             }
 
-            /* Roblox panel mobile */
-            .roblox-panel {
-                padding: 10px;
-                overflow-y: auto;
-            }
-
-            .roblox-panel h3 {
-                font-size: 1.1em;
-                margin-bottom: 5px;
-            }
-
-            .aura-display {
-                font-size: 2em;
-            }
-
-            .aura-buttons {
-                gap: 5px;
-            }
-
-            .aura-btn {
-                padding: 8px 12px;
-                font-size: 0.75em;
-            }
-
-            .roast-section {
-                padding: 10px;
-                margin-bottom: 10px;
-            }
-
-            .roast-display {
-                font-size: 1em;
-                min-height: 40px;
-            }
-
-            .roast-btn, .quiz-btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-
-            .quiz-section {
-                padding: 10px;
-            }
-
-            .quiz-result {
-                font-size: 1.4em;
-            }
         }
 
         /* Extra small screens */
@@ -1508,6 +1552,88 @@
                 font-size: 0.85em;
             }
         }
+
+        /* Mobile Chat Styles */
+        @media (max-width: 768px) {
+            .chat-panel {
+                padding: 5px;
+                height: 100%;
+                max-height: 100%;
+                overflow: hidden;
+            }
+
+            .chat-panel h3 {
+                font-size: 1em;
+                margin-bottom: 5px;
+                flex-shrink: 0;
+            }
+
+            .user-status-bar {
+                padding: 5px 10px;
+                font-size: 0.75em;
+                margin-bottom: 5px;
+                flex-shrink: 0;
+            }
+
+            .chat-messages {
+                flex: 1;
+                min-height: 0;
+                padding: 5px;
+                overflow-y: auto;
+            }
+
+            .chat-message {
+                padding: 6px 10px;
+                max-width: 85%;
+                font-size: 0.85em;
+            }
+
+            .chat-input-area {
+                gap: 3px;
+                flex-shrink: 0;
+            }
+
+            .chat-input-area input {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+
+            .chat-input-area button {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .chat-login-prompt {
+                padding: 10px;
+                font-size: 0.85em;
+                flex-shrink: 0;
+            }
+
+            .chat-login-prompt button {
+                padding: 6px 15px;
+                font-size: 0.85em;
+            }
+
+            .poll-container {
+                padding: 8px;
+            }
+
+            .poll-question {
+                font-size: 0.85em;
+            }
+
+            .poll-option {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+
+            /* כפתור מחיקה במובייל */
+            .delete-msg-btn {
+                padding: 2px 5px;
+                font-size: 0.8em;
+            }
+        }
     </style>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -1531,6 +1657,50 @@
             <div class="mobile-footer" id="mobileFooter">
                 <!-- footer לפי הטאב -->
             </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <h3>🔐 התחברות / הרשמה</h3>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-auth-tab="login">התחברות</button>
+                <button class="auth-tab" data-auth-tab="register">הרשמה</button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="auth-form active" id="loginForm">
+                <input type="text" id="loginUsername" placeholder="שם משתמש">
+                <input type="password" id="loginPassword" placeholder="סיסמה">
+                <button class="auth-submit-btn" id="loginBtn">התחבר</button>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form" id="registerForm">
+                <input type="text" id="registerUsername" placeholder="בחר שם משתמש">
+                <input type="password" id="registerPassword" placeholder="בחר סיסמה (לפחות 4 תווים)">
+                <button class="auth-submit-btn" id="registerBtn">הירשם</button>
+            </div>
+
+            <div class="auth-error" id="authError"></div>
+            <button class="auth-close-btn" onclick="closeAuthModal()">✕</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-panel-content">
+            <h3>🛠️ פאנל ניהול</h3>
+
+            <div class="admin-section">
+                <h4>👥 משתמשים רשומים</h4>
+                <div class="user-list" id="userList">
+                    <!-- יתמלא דינמית -->
+                </div>
+            </div>
+
+            <button class="admin-close-btn" onclick="closeAdminPanel()">סגור</button>
         </div>
     </div>
 
@@ -1560,7 +1730,6 @@
                 <button class="category-btn" data-category="computers">💻 מחשבים</button>
                 <button class="category-btn" data-category="sports">⚽ ספורט</button>
                 <button class="category-btn" data-category="farts">💨 פלוצים</button>
-                <button class="category-btn" data-category="roblox">🎮 ROBLOX</button>
                 <button class="category-btn" data-category="chat">💬 צ'אט</button>
             </div>
 
@@ -1610,52 +1779,40 @@
                 </div>
             </div>
 
-            <!-- ROBLOX Zone Panel -->
-            <div class="roblox-panel" id="robloxPanel">
-                <h3>🎮 אזור הבריינרוט 🧠</h3>
-
-                <!-- Aura Meter -->
-                <div class="aura-section">
-                    <div class="aura-display" id="auraDisplay">0</div>
-                    <div class="aura-label">✨ האורה שלך ✨</div>
-                    <div class="aura-buttons">
-                        <button class="aura-btn gain" data-aura="1000">ריז +1000</button>
-                        <button class="aura-btn gain" data-aura="500">סיגמה +500</button>
-                        <button class="aura-btn lose" data-aura="-500">אוהיו 500-</button>
-                        <button class="aura-btn lose" data-aura="-1000">הפסד 1000-</button>
-                        <button class="aura-btn steal" id="fanum-tax">🍟 מס פאנום</button>
-                    </div>
-                </div>
-
-                <!-- Brainrot Roast Generator -->
-                <div class="roast-section">
-                    <div class="roast-title">🔥 מחולל העלבונות 🔥</div>
-                    <div class="roast-display" id="roastDisplay">לחץ לקבל העלבה...</div>
-                    <button class="roast-btn" id="roastBtn">💀 תעליב אותי</button>
-                </div>
-
-                <!-- Brainrot Level Quiz -->
-                <div class="quiz-section">
-                    <div class="quiz-title">🧠 מה רמת הבריינרוט שלך?</div>
-                    <div class="quiz-result" id="quizResult">???</div>
-                    <div class="quiz-description" id="quizDesc">לחץ לגלות כמה בריינרוט יש לך</div>
-                    <button class="quiz-btn" id="quizBtn">🎲 בדוק את הרמה</button>
-                    <div class="quiz-progress" id="quizProgress"></div>
-                </div>
-            </div>
-
             <!-- Chat Panel -->
             <div class="chat-panel" id="chatPanel">
                 <h3>💬 צ'אט ציבורי 💬</h3>
+
+                <!-- User Status Bar -->
+                <div class="user-status-bar" id="chatUserStatus">
+                    <div class="user-info" id="chatUserInfo">
+                        <span>אורח</span>
+                    </div>
+                    <div class="user-actions" id="chatUserActions">
+                        <button class="login-btn" onclick="openAuthModal()">התחבר</button>
+                    </div>
+                </div>
+
                 <div class="chat-messages" id="chatMessages">
                     <div class="chat-empty">טוען הודעות...</div>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="כתוב הודעה..." maxlength="500">
-                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
-                    <button id="uploadImageBtn" title="העלה תמונה">📷</button>
-                    <button id="createPollBtn" title="צור סקר">📊</button>
-                    <button id="sendMessageBtn" title="שלח">➡️</button>
+
+                <!-- Chat Input Area - will be hidden/shown based on permissions -->
+                <div id="chatInputContainer">
+                    <div class="chat-login-prompt" id="chatLoginPrompt" style="display: none;">
+                        <p>💡 רוצה לכתוב בצ'אט? התחבר או הירשם!</p>
+                        <button onclick="openAuthModal()">התחבר / הירשם</button>
+                    </div>
+                    <div class="chat-blocked-msg" id="chatBlockedMsg" style="display: none;">
+                        <p>🚫 המשתמש שלך חסום מכתיבה בצ'אט</p>
+                    </div>
+                    <div class="chat-input-area" id="chatInputArea">
+                        <input type="text" id="chatInput" placeholder="כתוב הודעה..." maxlength="500">
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                        <button id="uploadImageBtn" title="העלה תמונה">📷</button>
+                        <button id="createPollBtn" title="צור סקר">📊</button>
+                        <button id="sendMessageBtn" title="שלח">➡️</button>
+                    </div>
                 </div>
             </div>
 
@@ -1709,6 +1866,412 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+
+        // ========== AUTH SYSTEM (שם משתמש + סיסמה) ==========
+        // רמות הרשאה: guest (אורח), user (משתמש רשום), admin (מנהל), superadmin (סופר-מנהל)
+        let currentUser = null;
+        let currentUserData = null;
+
+        // Hash פשוט לסיסמה (לא מאובטח לחלוטין אבל מספיק לאתר ילדים)
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password + 'jokefactory_salt');
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // פונקציות Auth
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.getElementById('authError').style.display = 'none';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('registerUsername').value = '';
+            document.getElementById('registerPassword').value = '';
+            document.getElementById('authError').style.display = 'none';
+        }
+
+        function showAuthError(message) {
+            const errorEl = document.getElementById('authError');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        // הרשמה
+        async function registerUser() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+
+            if (!username || !password) {
+                showAuthError('נא למלא את כל השדות');
+                return;
+            }
+
+            if (username.length < 2) {
+                showAuthError('שם המשתמש חייב להכיל לפחות 2 תווים');
+                return;
+            }
+
+            if (password.length < 4) {
+                showAuthError('הסיסמה חייבת להכיל לפחות 4 תווים');
+                return;
+            }
+
+            // בדיקה שאין תווים מיוחדים בשם המשתמש
+            if (!/^[א-תa-zA-Z0-9_]+$/.test(username)) {
+                showAuthError('שם המשתמש יכול להכיל רק אותיות, מספרים וקו תחתון');
+                return;
+            }
+
+            try {
+                // בדיקה אם שם המשתמש כבר קיים
+                const existingUser = await db.collection('users').doc(username.toLowerCase()).get();
+                if (existingUser.exists) {
+                    showAuthError('שם המשתמש כבר תפוס, בחר שם אחר');
+                    return;
+                }
+
+                const passwordHash = await hashPassword(password);
+
+                // יצירת מסמך משתמש ב-Firestore
+                await db.collection('users').doc(username.toLowerCase()).set({
+                    username: username,
+                    displayName: username,
+                    password: password,
+                    passwordHash: passwordHash,
+                    role: 'user',
+                    blocked: false,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // התחברות אוטומטית
+                currentUser = { id: username.toLowerCase(), username: username };
+                currentUserData = {
+                    username: username,
+                    displayName: username,
+                    role: 'user',
+                    blocked: false
+                };
+
+                // שמירה ב-localStorage
+                localStorage.setItem('chatUser', JSON.stringify(currentUser));
+
+                closeAuthModal();
+                updateChatUI();
+            } catch (error) {
+                console.error('Registration error:', error);
+                showAuthError('שגיאה בהרשמה, נסה שוב');
+            }
+        }
+
+        // התחברות
+        async function loginUser() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showAuthError('נא למלא את כל השדות');
+                return;
+            }
+
+            try {
+                const userDoc = await db.collection('users').doc(username.toLowerCase()).get();
+
+                if (!userDoc.exists) {
+                    showAuthError('שם משתמש לא קיים');
+                    return;
+                }
+
+                const userData = userDoc.data();
+                const passwordHash = await hashPassword(password);
+
+                if (userData.passwordHash !== passwordHash) {
+                    showAuthError('סיסמה שגויה');
+                    return;
+                }
+
+                // התחברות מוצלחת
+                currentUser = { id: username.toLowerCase(), username: userData.username };
+                currentUserData = userData;
+
+                // שמירה ב-localStorage
+                localStorage.setItem('chatUser', JSON.stringify(currentUser));
+
+                // טעינת מועדפים ודירוגים אישיים מחשבון המשתמש
+                if (userData.favorites && userData.favorites.length > 0) {
+                    favorites = userData.favorites;
+                    localStorage.setItem('jokeFavorites', JSON.stringify(favorites));
+                    renderFavoritesList();
+                }
+                if (userData.ratings) {
+                    myRatings = userData.ratings;
+                    localStorage.setItem('myJokeRatings', JSON.stringify(myRatings));
+                }
+
+                closeAuthModal();
+                updateChatUI();
+                updateFavoriteButton();
+                // רענון ההודעות כדי להציג כפתורי מחיקה לסופר-מנהל
+                renderAllMessages();
+            } catch (error) {
+                console.error('Login error:', error);
+                showAuthError('שגיאה בהתחברות, נסה שוב');
+            }
+        }
+
+        // התנתקות
+        function logoutUser() {
+            currentUser = null;
+            currentUserData = null;
+            localStorage.removeItem('chatUser');
+
+            // איפוס מועדפים ודירוגים אישיים מהמסך (אורח מתחיל מאפס)
+            favorites = [];
+            myRatings = {};
+            localStorage.setItem('jokeFavorites', '[]');
+            localStorage.setItem('myJokeRatings', '{}');
+            renderFavoritesList();
+            updateFavoriteButton();
+
+            updateChatUI();
+            // רענון ההודעות כדי להסתיר כפתורי מחיקה
+            renderAllMessages();
+        }
+
+        // טעינת משתמש מ-localStorage
+        async function loadSavedUser() {
+            const savedUser = localStorage.getItem('chatUser');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    const userDoc = await db.collection('users').doc(currentUser.id).get();
+                    if (userDoc.exists) {
+                        currentUserData = userDoc.data();
+
+                        // טעינת מועדפים ודירוגים אישיים מחשבון המשתמש
+                        if (currentUserData.favorites && currentUserData.favorites.length > 0) {
+                            favorites = currentUserData.favorites;
+                            localStorage.setItem('jokeFavorites', JSON.stringify(favorites));
+                            renderFavoritesList();
+                        }
+                        if (currentUserData.ratings) {
+                            myRatings = currentUserData.ratings;
+                            localStorage.setItem('myJokeRatings', JSON.stringify(myRatings));
+                        }
+                    } else {
+                        // משתמש נמחק, התנתק
+                        logoutUser();
+                    }
+                } catch (error) {
+                    console.error('Error loading saved user:', error);
+                    logoutUser();
+                }
+            }
+            updateChatUI();
+        }
+
+        // עדכון ממשק המשתמש בצ'אט
+        function updateChatUI() {
+            const chatUserInfo = document.getElementById('chatUserInfo');
+            const chatUserActions = document.getElementById('chatUserActions');
+            const chatInputArea = document.getElementById('chatInputArea');
+            const chatLoginPrompt = document.getElementById('chatLoginPrompt');
+            const chatBlockedMsg = document.getElementById('chatBlockedMsg');
+            const uploadImageBtn = document.getElementById('uploadImageBtn');
+            const createPollBtn = document.getElementById('createPollBtn');
+
+            if (!currentUser) {
+                // אורח - יכול לקרוא אבל לא לכתוב
+                chatUserInfo.innerHTML = '<span>👤 אורח</span>';
+                chatUserActions.innerHTML = '<button class="login-btn" onclick="openAuthModal()">התחבר</button>';
+                chatInputArea.style.display = 'none';
+                chatLoginPrompt.style.display = 'block';
+                chatBlockedMsg.style.display = 'none';
+            } else if (currentUserData && currentUserData.blocked) {
+                // משתמש חסום
+                chatUserInfo.innerHTML = `<span>🚫 ${currentUserData.displayName}</span>`;
+                chatUserActions.innerHTML = '<button class="logout-btn" onclick="logoutUser()">התנתק</button>';
+                chatInputArea.style.display = 'none';
+                chatLoginPrompt.style.display = 'none';
+                chatBlockedMsg.style.display = 'block';
+            } else if (currentUserData) {
+                // משתמש מחובר
+                const role = currentUserData.role || 'user';
+                const roleLabels = {
+                    user: { label: 'משתמש', class: 'role-user' },
+                    admin: { label: 'מנהל', class: 'role-admin' },
+                    superadmin: { label: 'סופר-מנהל', class: 'role-superadmin' }
+                };
+                const roleInfo = roleLabels[role] || roleLabels.user;
+
+                chatUserInfo.innerHTML = `
+                    <span>${currentUserData.displayName}</span>
+                    <span class="user-role ${roleInfo.class}">${roleInfo.label}</span>
+                `;
+
+                let actionsHTML = '';
+                if (role === 'admin' || role === 'superadmin') {
+                    actionsHTML += '<button class="admin-btn" onclick="openAdminPanel()">ניהול</button>';
+                }
+                actionsHTML += '<button class="logout-btn" onclick="logoutUser()">התנתק</button>';
+                chatUserActions.innerHTML = actionsHTML;
+
+                chatInputArea.style.display = 'flex';
+                chatLoginPrompt.style.display = 'none';
+                chatBlockedMsg.style.display = 'none';
+
+                // הרשאות כפתורים
+                if (role === 'admin' || role === 'superadmin') {
+                    uploadImageBtn.style.display = 'block';
+                    createPollBtn.style.display = 'block';
+                } else {
+                    uploadImageBtn.style.display = 'none';
+                    createPollBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // פאנל ניהול
+        function openAdminPanel() {
+            if (!currentUserData || (currentUserData.role !== 'admin' && currentUserData.role !== 'superadmin')) {
+                return;
+            }
+            document.getElementById('adminPanel').classList.add('active');
+            loadUserList();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        // טעינת רשימת משתמשים
+        async function loadUserList() {
+            const userListEl = document.getElementById('userList');
+            userListEl.innerHTML = '<p>טוען...</p>';
+
+            try {
+                const snapshot = await db.collection('users').orderBy('createdAt', 'desc').get();
+                let html = '';
+
+                snapshot.forEach(doc => {
+                    const user = doc.data();
+                    const isSuperAdmin = currentUserData.role === 'superadmin';
+                    const isBlocked = user.blocked;
+                    const roleLabels = { user: 'משתמש', admin: 'מנהל', superadmin: 'סופר-מנהל' };
+
+                    html += `
+                        <div class="user-item ${isBlocked ? 'blocked' : ''}">
+                            <div class="user-item-info">
+                                <span>${user.displayName || user.email}</span>
+                                <span class="user-role role-${user.role}">${roleLabels[user.role] || 'משתמש'}</span>
+                            </div>
+                            <div class="user-item-actions">
+                                ${isSuperAdmin && user.role !== 'superadmin' ? `
+                                    ${isBlocked
+                                        ? `<button class="unblock-btn" onclick="unblockUser('${doc.id}')">בטל חסימה</button>`
+                                        : `<button class="block-btn" onclick="blockUser('${doc.id}')">חסום</button>`
+                                    }
+                                    <button class="role-btn" onclick="changeUserRole('${doc.id}', '${user.role}')">שנה הרשאה</button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                userListEl.innerHTML = html || '<p>אין משתמשים</p>';
+            } catch (error) {
+                console.error('Error loading users:', error);
+                userListEl.innerHTML = '<p>שגיאה בטעינת משתמשים</p>';
+            }
+        }
+
+        // חסימת משתמש
+        async function blockUser(userId) {
+            if (currentUserData.role !== 'superadmin') return;
+            try {
+                await db.collection('users').doc(userId).update({ blocked: true });
+                loadUserList();
+            } catch (error) {
+                console.error('Error blocking user:', error);
+            }
+        }
+
+        // ביטול חסימת משתמש
+        async function unblockUser(userId) {
+            if (currentUserData.role !== 'superadmin') return;
+            try {
+                await db.collection('users').doc(userId).update({ blocked: false });
+                loadUserList();
+            } catch (error) {
+                console.error('Error unblocking user:', error);
+            }
+        }
+
+        // שינוי הרשאה
+        async function changeUserRole(userId, currentRole) {
+            if (currentUserData.role !== 'superadmin') return;
+
+            const roles = ['user', 'admin'];
+            const roleLabels = { user: 'משתמש', admin: 'מנהל' };
+            const currentIndex = roles.indexOf(currentRole);
+            const nextRole = roles[(currentIndex + 1) % roles.length];
+
+            if (confirm(`לשנות הרשאה ל-${roleLabels[nextRole]}?`)) {
+                try {
+                    await db.collection('users').doc(userId).update({ role: nextRole });
+                    loadUserList();
+                } catch (error) {
+                    console.error('Error changing role:', error);
+                }
+            }
+        }
+
+        // טעינת משתמש שמור בהפעלת הדף
+        loadSavedUser();
+
+        // Event Listeners לטפסי Auth
+        document.getElementById('loginBtn').addEventListener('click', loginUser);
+        document.getElementById('registerBtn').addEventListener('click', registerUser);
+
+        document.getElementById('loginUsername').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loginUser();
+        });
+        document.getElementById('loginPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loginUser();
+        });
+        document.getElementById('registerUsername').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') registerUser();
+        });
+        document.getElementById('registerPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') registerUser();
+        });
+
+        // טאבים בטופס Auth
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                tab.classList.add('active');
+                const formId = tab.dataset.authTab === 'login' ? 'loginForm' : 'registerForm';
+                document.getElementById(formId).classList.add('active');
+                document.getElementById('authError').style.display = 'none';
+            });
+        });
+
+        // סגירת מודלים בלחיצה מחוץ
+        document.getElementById('authModal').addEventListener('click', (e) => {
+            if (e.target.id === 'authModal') closeAuthModal();
+        });
+        document.getElementById('adminPanel').addEventListener('click', (e) => {
+            if (e.target.id === 'adminPanel') closeAdminPanel();
+        });
+
+        // ========== END AUTH SYSTEM ==========
 
         // משתנים גלובליים
         let jokes = {};
@@ -1902,9 +2465,20 @@
             // שמירת דירוג ל-Firebase
             const jokeKey = currentJoke.text.substring(0, 50).replace(/[\/\.#$\[\]]/g, '_');
 
-            // שמירת הדירוג גם ב-localStorage של המשתמש
+            // שמירת הדירוג ב-localStorage (לאורחים או כגיבוי)
             myRatings[jokeKey] = rating;
             localStorage.setItem('myJokeRatings', JSON.stringify(myRatings));
+
+            // אם מחובר - שמירה גם בחשבון המשתמש ב-Firebase
+            if (currentUser && currentUserData) {
+                try {
+                    await db.collection('users').doc(currentUser.id).update({
+                        [`ratings.${jokeKey}`]: rating
+                    });
+                } catch (error) {
+                    console.error('Error saving rating to user:', error);
+                }
+            }
 
             try {
                 const docRef = db.collection('ratings').doc(jokeKey);
@@ -2088,7 +2662,7 @@
         }
 
         // שמירה/הסרה ממועדפים
-        function toggleFavorite() {
+        async function toggleFavorite() {
             if (!currentJoke || !currentJoke.text || currentJoke.text.includes('לחצו על')) return;
 
             const index = favorites.findIndex(f => f.joke === currentJoke.text);
@@ -2098,23 +2672,60 @@
                 favorites.unshift({ joke: currentJoke.text, category: currentJoke.category });
             }
 
+            // שמירה ב-localStorage (לאורחים או כגיבוי)
             localStorage.setItem('jokeFavorites', JSON.stringify(favorites));
+
+            // אם מחובר - שמירה גם ב-Firebase
+            if (currentUser && currentUserData) {
+                try {
+                    await db.collection('users').doc(currentUser.id).update({
+                        favorites: favorites
+                    });
+                } catch (error) {
+                    console.error('Error saving favorites to Firebase:', error);
+                }
+            }
+
             updateFavoriteButton();
             renderFavoritesList();
         }
 
         // הסרת מועדף
-        function removeFavorite(index) {
+        async function removeFavorite(index) {
             favorites.splice(index, 1);
             localStorage.setItem('jokeFavorites', JSON.stringify(favorites));
+
+            // אם מחובר - שמירה גם ב-Firebase
+            if (currentUser && currentUserData) {
+                try {
+                    await db.collection('users').doc(currentUser.id).update({
+                        favorites: favorites
+                    });
+                } catch (error) {
+                    console.error('Error saving favorites to Firebase:', error);
+                }
+            }
+
             renderFavoritesList();
             updateFavoriteButton();
         }
 
         // ניקוי מועדפים
-        function clearFavorites() {
+        async function clearFavorites() {
             favorites = [];
             localStorage.setItem('jokeFavorites', '[]');
+
+            // אם מחובר - שמירה גם ב-Firebase
+            if (currentUser && currentUserData) {
+                try {
+                    await db.collection('users').doc(currentUser.id).update({
+                        favorites: []
+                    });
+                } catch (error) {
+                    console.error('Error clearing favorites in Firebase:', error);
+                }
+            }
+
             renderFavoritesList();
             updateFavoriteButton();
         }
@@ -2129,19 +2740,12 @@
             // בדיקה אם זו קטגוריית מיוחדת
             if (category === 'farts') {
                 showFartsPanel();
-                hideRobloxPanel();
-                hideChatPanel();
-            } else if (category === 'roblox') {
-                showRobloxPanel();
-                hideFartsPanel();
                 hideChatPanel();
             } else if (category === 'chat') {
                 showChatPanel();
                 hideFartsPanel();
-                hideRobloxPanel();
             } else {
                 hideFartsPanel();
-                hideRobloxPanel();
                 hideChatPanel();
                 showNewJoke();
             }
@@ -2164,36 +2768,16 @@
             fartsPanel.classList.remove('active');
         }
 
-        // הצגת פאנל רובלוקס
-        function showRobloxPanel() {
-            const jokeDisplay = document.querySelector('.joke-display');
-            const robloxPanel = document.getElementById('robloxPanel');
-            const bottomRow = document.querySelector('.bottom-row');
-
-            jokeDisplay.style.display = 'none';
-            bottomRow.style.display = 'none';
-            robloxPanel.classList.add('active');
-        }
-
-        // הסתרת פאנל רובלוקס
-        function hideRobloxPanel() {
-            const jokeDisplay = document.querySelector('.joke-display');
-            const robloxPanel = document.getElementById('robloxPanel');
-            const bottomRow = document.querySelector('.bottom-row');
-
-            robloxPanel.classList.remove('active');
-            jokeDisplay.style.display = 'flex';
-            bottomRow.style.display = 'flex';
-        }
-
         // הצגת פאנל צ'אט
         function showChatPanel() {
             const jokeDisplay = document.querySelector('.joke-display');
             const chatPanel = document.getElementById('chatPanel');
             const bottomRow = document.querySelector('.bottom-row');
+            const ratingSection = document.querySelector('.rating-section');
 
             jokeDisplay.style.display = 'none';
-            bottomRow.style.display = 'none';
+            bottomRow.style.setProperty('display', 'none', 'important');
+            if (ratingSection) ratingSection.style.display = 'none';
             chatPanel.classList.add('active');
         }
 
@@ -2202,10 +2786,12 @@
             const jokeDisplay = document.querySelector('.joke-display');
             const chatPanel = document.getElementById('chatPanel');
             const bottomRow = document.querySelector('.bottom-row');
+            const ratingSection = document.querySelector('.rating-section');
 
             chatPanel.classList.remove('active');
             jokeDisplay.style.display = 'flex';
-            bottomRow.style.display = 'flex';
+            bottomRow.style.setProperty('display', 'flex', 'important');
+            if (ratingSection) ratingSection.style.display = 'block';
         }
 
         // Event Listeners
@@ -2588,12 +3174,31 @@
         async function sendMessage(text, imageUrl = null, poll = null) {
             if (!text && !imageUrl && !poll) return;
 
+            // בדיקת הרשאות
+            if (!currentUser || !currentUserData) {
+                alert('יש להתחבר כדי לכתוב בצ\'אט');
+                return;
+            }
+
+            if (currentUserData.blocked) {
+                alert('המשתמש שלך חסום מכתיבה בצ\'אט');
+                return;
+            }
+
+            // רק מנהלים יכולים להעלות תמונות וסקרים
+            const role = currentUserData.role || 'user';
+            if ((imageUrl || poll) && role !== 'admin' && role !== 'superadmin') {
+                alert('רק מנהלים יכולים להעלות תמונות וסקרים');
+                return;
+            }
+
             try {
                 await db.collection('chat_messages').add({
                     text: text || '',
                     imageUrl: imageUrl,
                     poll: poll,
-                    username: chatUsername,
+                    username: currentUserData.displayName,
+                    userId: currentUser.id,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 chatInput.value = '';
@@ -2605,20 +3210,24 @@
         // הצגת הודעה
         function renderMessage(doc) {
             const data = doc.data();
-            const isMine = data.username === chatUsername;
+            const isMine = currentUser && data.userId === currentUser.id;
             const time = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' }) : '';
+            const canDelete = currentUserData && currentUserData.role === 'superadmin';
 
             let messageHTML = `
                 <div class="chat-message ${isMine ? 'mine' : 'other'}">
-                    <div class="username">${data.username}</div>
+                    <div class="message-header">
+                        <span class="username">${data.username}</span>
+                        ${canDelete ? `<button class="delete-msg-btn" onclick="deleteMessage('${doc.id}')" title="מחק הודעה">🗑️</button>` : ''}
+                    </div>
             `;
 
             if (data.text) {
-                messageHTML += `<div class="text">${escapeHtml(data.text)}</div>`;
+                messageHTML += `<div class="text">${linkifyText(data.text)}</div>`;
             }
 
             if (data.imageUrl) {
-                messageHTML += `<img src="${data.imageUrl}" alt="תמונה" onclick="window.open('${data.imageUrl}', '_blank')">`;
+                messageHTML += `<img src="${data.imageUrl}" alt="תמונה">`;
             }
 
             if (data.poll) {
@@ -2629,6 +3238,24 @@
 
             return messageHTML;
         }
+
+        // מחיקת הודעה (רק לסופר-מנהל)
+        async function deleteMessage(messageId) {
+            if (!currentUserData || currentUserData.role !== 'superadmin') {
+                alert('רק סופר-מנהל יכול למחוק הודעות');
+                return;
+            }
+
+            if (!confirm('למחוק את ההודעה?')) return;
+
+            try {
+                await db.collection('chat_messages').doc(messageId).delete();
+            } catch (error) {
+                console.error('Error deleting message:', error);
+                alert('שגיאה במחיקת ההודעה');
+            }
+        }
+        window.deleteMessage = deleteMessage;
 
         // הצגת סקר
         function renderPoll(docId, poll) {
@@ -2692,21 +3319,38 @@
             return div.innerHTML;
         }
 
+        // זיהוי כתובות אינטרנט והפיכתן ללינקים
+        function linkifyText(text) {
+            const escapedText = escapeHtml(text);
+            const urlRegex = /(https?:\/\/[^\s<]+)/g;
+            return escapedText.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+        }
+
+        // משתנה לשמירת ההודעות האחרונות לרענון
+        let lastMessagesSnapshot = null;
+
+        // פונקציה לרנדר את ההודעות
+        function renderAllMessages() {
+            if (!lastMessagesSnapshot) return;
+            chatMessages.innerHTML = '';
+            if (lastMessagesSnapshot.empty) {
+                chatMessages.innerHTML = '<div class="chat-empty">אין הודעות עדיין. היה הראשון לכתוב! 💬</div>';
+                return;
+            }
+            lastMessagesSnapshot.forEach(doc => {
+                chatMessages.innerHTML += renderMessage(doc);
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
         // האזנה להודעות בזמן אמת
         function listenToMessages() {
             db.collection('chat_messages')
                 .orderBy('timestamp', 'asc')
                 .limitToLast(100)
                 .onSnapshot((snapshot) => {
-                    chatMessages.innerHTML = '';
-                    if (snapshot.empty) {
-                        chatMessages.innerHTML = '<div class="chat-empty">אין הודעות עדיין. היה הראשון לכתוב! 💬</div>';
-                        return;
-                    }
-                    snapshot.forEach(doc => {
-                        chatMessages.innerHTML += renderMessage(doc);
-                    });
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    lastMessagesSnapshot = snapshot;
+                    renderAllMessages();
                 }, (error) => {
                     console.error('שגיאה בטעינת הודעות:', error);
                     chatMessages.innerHTML = '<div class="chat-empty">שגיאה בטעינת הודעות</div>';
